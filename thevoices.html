@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Voices</title>
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+        function TheVoices(){return{
+
+            currentWeek:0,
+            weekVoicesLastI:-1,
+            lastWasAltVoices:false,
+            speech:null,
+            cancelled:false,
+
+            randomNamesOfNoImportanceToMeBecauseAnonymityButTheRealVoicesUseNamesRelevantToMe:[
+                'clarence',
+                'charlie',
+                'ernest',
+                'edna',
+                'edith',
+                'lena',
+                'archie',
+                'ruby',
+                'bertha',
+                'mabel',
+                'albert',
+                'earl',
+                'a person in the past',
+                'a family member',
+                'a friend of yours',
+                'an acquaintance',
+                'a stranger',
+                'powerful people',
+                'politicians',
+                'the queen',
+                'the king',
+                'ancestors',
+                'brother',
+                'sister',
+                'mother',
+                'father',
+                'realize',
+                'pirate',
+                'monster'
+            ],
+
+            repeatedAnnoyingWords:[
+                'authority',
+                'government',
+                'psychopath',
+                'schizophrenic',
+                'depression',
+                'suicide',
+                'taxes',
+                'mafia',
+                'medication',
+                'militia',
+                'capitalism',
+                'who',
+                'hypocrite',
+                'liar',
+                'corporation',
+                'company',
+                'responsibility',
+                'schizophrenia',
+                'pills',
+                'medicine',
+                'police',
+                'military',
+                'democracy',
+                'republic',
+                'debt',
+                'healthcare',
+                'induced',
+                'multiple personalities',
+                'auditory hallucinations',
+                'software developer',
+                'computer programmer',
+                'computer programming',
+                'psychological expert',
+                'escalation',
+                'paranoia',
+                'delusions',
+                'deception',
+                'dead',
+                'death',
+                'capitalists',
+                'democrats',
+                'republicans',
+                'jaywalking',
+                'loitering',
+                'littering',
+                'don\'t',
+                'can\'t',
+                'won\'t',
+                'shouldn\'t',
+                'homeless',
+                'hospital',
+                'mental',
+                'brainstem',
+                'exactly',
+                'insecure',
+                'rarely',
+                'assassinated',
+                'retribution',
+                'microchip',
+                'propaganda',
+                'repent',
+                'please',
+                'sorry',
+                'musician',
+                'war',
+                'traitor',
+                'pain',
+                'suffering'
+            ],
+
+            weeksVoices:[
+                [
+                    'he is going to be executed',
+                    'everybody knows that if you',
+                    'this is what happens when you',
+                    'and then they are going to',
+                    'institutionalized for life',
+                    'we can\'t believe that',
+                    'you shouldn\'t have',
+                    'they said that if you',
+                    'faking a mental illness',
+                    'they are just trying to',
+                    'won\'t take your medication',
+                    'for some reason',
+                    'they just can\'t',
+                    'for the rest of your life',
+                    'the state of',
+                    'you don\'t really hear voices in your head',
+                    'she said that you',
+                    'he said that you',
+                    'they said that you',
+                    'it is all a result of',
+                    'they think that',
+                    'and nobody cares',
+                    'we want to help you',
+                    'that is exactly',
+                    'what they are doing',
+                    'they were even trying to',
+                    'every single day',
+                    'we don\'t understand why',
+                    'just for saying',
+                    'just because',
+                    'we can\'t believe that',
+                    'he just doesn\'t want to',
+                    'hearing voices',
+                    'altered personality',
+                    'the organization says that',
+                    'a million dollars',
+                    'a billion dollars',
+                    'that was so funny',
+                    'these people are out to get you',
+                    'you have to take responsibility',
+                    'you don\'t know why',
+                    'following you',
+                    'induced mental illness',
+                    'you will win the lotto',
+                    'you are sick',
+                    'take medication for the rest of your life',
+                    'you could have',
+                    'more than a decade ago',
+                    'everybody works',
+                    'they are',
+                    'we are',
+                    'she is',
+                    'he is',
+                    'they don\'t know how',
+                    'onimous profession described in two words',
+                    'these people are mad',
+                    'paranoia inducing phrases',
+                    'you are going to be a millionaire',
+                    'instant captain of expensive piece of engineering',
+                    'everybody loves you',
+                    'everybody hates you',
+                    'you are so funny',
+                    'consider a career',
+                    'who are you connected to',
+                    'we overheard in a restaurant',
+                    'we overheard',
+                    'who do you know',
+                    'can\'t even',
+                    'don\'t even',
+                    'you can\'t',
+                    'you don\'t',
+                    'won\'t even',
+                    'you won\'t',
+                    'you shouldn\'t',
+                    'shouldn\'t even',
+                    'you wouldn\'t',
+                    'wouldn\'t even',
+                    'looking for something to prove',
+                    'you are a genius',
+                    'you are the smartest person in the world',
+                    'rarely this speech will reveal a top secret', /*I KID! I KID! DON'T EXECUTE ME!*/
+                    'they are putting voices in your head',
+                    'we are going to',
+                    'we are putting voices in your head',
+                    'you have delusions',
+                    'you are delusional',
+                    'they are even trying to',
+                    'the whole world knows',
+                    'you live in a bubble',
+                    'you are beautiful',
+                    'you are too proud',
+                    'you need to get help',
+                    'that is exactly what they would say',
+                    'that is exactly what they would think',
+                    'eye for an eye',
+                    'we think you faked mental illness so we gave it to you',
+                    'this message brought to you by',
+                    'a decade ago',
+                    'a century ago',
+                    'controlling karma is impossible',
+                    'it is going to get worse',
+                    'it will not go away',
+                    'if you do not take your medication',
+                    'you pissed off',
+                    'you angered',
+                    'people are dying',
+                    'divide and conquer',
+                    'you are a product',
+                    'we can profit off of you',
+                    'you did it to yourself',
+                    'divide or unite',
+                    'this is what you deserve',
+                    'the foundation for putting voices in your head',
+                    'delusions of grandeur',
+                    'they are just',
+                    'a bunch of',
+                    'they know what voices are',
+                    'that is what they are trying',
+                    'pay your debt',
+                    'they are hearing voices in their head',
+                    'we will put voices in their head',
+                    'a foreign country',
+                    'we predicted this',
+                    'no excuses',
+                    'false accusations',
+                    'please stop',
+                    'please let me sleep',
+                    'we tell you what we want you to think',
+                    'we are going to have to start',
+                    'and that is what we realized',
+                    'they even got that person involved',
+                    'that person has so much power and influence',
+                    'declaration of independence',
+                    'bill of rights',
+                    'the constitution',
+                    'you are really funny',
+                    'and now we have to',
+                    'to experience pain',
+                    'to experience psychological pain'
+                ],
+                [
+                    'this is last weeks voices',
+                    'number two'
+                ]
+            ],
+
+            init:function(){
+
+                $(window).unload(function() {
+                    window.speechSynthesis.cancel();
+                });
+
+            },
+
+            onStartStopClick:function(week){
+                if($('#start').hasClass('stop')){
+                    //stopping
+                    window.speechSynthesis.cancel();
+                    this.cancelled=true;
+                    $('#start').text('START').removeClass('stop');
+                }else{
+                    //starting
+                    this.currentWeek=week;
+                    this.weekVoicesLastI=-1;
+                    this.continueWeek();
+                    $('#start').text('STOP').addClass('stop');
+                }
+
+            },
+
+            continueWeek:function(event){
+
+                if(this.cancelled){
+                    this.cancelled=false;
+                    return;
+
+                }
+
+                var i;
+                var len=Math.floor((Math.random()*3))+1;
+                len+=Math.random()<.5?0:Math.floor(Math.random()*6);
+                var speech='';
+                for(i=0;i<len;i++){
+                    speech+=this.getNextSpeech()+' ';
+                }
+
+                try{
+                    this.speech=new SpeechSynthesisUtterance(speech);
+                }catch(error){
+                    alert('Internet Explorer is not supported. Please use the latest version of Firefox or Chrome.');
+                    return;
+                }
+
+                //
+                    var voices=window.speechSynthesis.getVoices();
+                    var voices2=[];
+                    if(voices.length&&voices[i]){
+                        for(i=0;i<len;i++){
+                            if(voices[i].name.toLowerCase().indexOf('david')>=0||voices[i].name.toLowerCase().indexOf('zira')>=0){
+                                voices2.push(voices[i]);
+                            }
+                        }
+                        this.speech.voice=voices2[Math.floor(voices2.length*Math.random())];
+                    }
+
+                    this.speech.pitch=.5+Math.random();
+                    this.speech.rate=(Math.random() *.3)+.2;
+                    this.speech.volume=(Math.random() *.7)+.15;
+                //
+
+                window.speechSynthesis.speak(this.speech);
+                this.speech.onend=this.continueWeek.bind(this);
+                this.speech.onboundary=this.onWordSpoken.bind(this);
+
+                speech=speech.split(' ');
+                speech=speech.join('</span> <span>');
+
+                $('#history').prepend('<p><span>'+speech+'</span></p>');
+
+                if($('#history p').length>20){
+                    $('#history p:last-child').remove();
+                }
+
+            },
+
+            onWordSpoken:function(event){
+                var highlightWordJq=$('#history>p:first-child>span.highlighted');
+                if(!highlightWordJq.length){
+                    $('#history>p:first-child>span:first-child').addClass('highlighted show');
+                }else{
+                    highlightWordJq.next().addClass('highlighted show');
+                    highlightWordJq.removeClass('highlighted');
+                    if(!highlightWordJq.next().next().length){
+                        console.log('near last');
+                        setTimeout(function(){
+
+                        }.bind(this),1000);
+
+                    }
+                }
+            },
+
+            getNextSpeech:function(){
+
+                var r;
+                var msg;
+
+                while(true){
+                    var r=Math.floor(this.weeksVoices[this.currentWeek].length*Math.random());
+                    if(r!=this.weekVoicesLastI){
+                        break;
+                    }
+                }
+
+                if(this.lastWasAltVoices||Math.random()<.33){
+                    this.weekVoicesLastI=r;
+                    msg=this.weeksVoices[this.currentWeek][r];
+                    this.lastWasAltVoices=false;
+                }else if(Math.random()<.2){
+                    r=Math.floor(Math.random()*this.randomNamesOfNoImportanceToMeBecauseAnonymityButTheRealVoicesUseNamesRelevantToMe.length);
+                    msg=this.randomNamesOfNoImportanceToMeBecauseAnonymityButTheRealVoicesUseNamesRelevantToMe[r];
+                    this.lastWasAltVoices=true;
+                }else{
+                    r=Math.floor(Math.random()*this.repeatedAnnoyingWords.length);
+                    msg=this.repeatedAnnoyingWords[r];
+                    this.lastWasAltVoices=true;
+                }
+
+                return msg;
+            }
+
+        }}
+
+        var theVoices=new TheVoices();
+
+        $(document).ready(function(){
+
+            theVoices.init();
+
+        });
+
+    </script>
+    <style>
+        #history>p>span.highlighted{
+            text-decoration:underline;
+        }
+        #history>p>span{
+            opacity:.1;
+            font-size: 20px;
+        }
+        #history>p{
+            background-color: rgba(0,0,0,.5);
+            padding:10px;
+            border-radius: 8px;
+            margin-left:40px;
+            margin-right:40px;
+            text-align: left;
+        }
+        #history>p>span.show{
+            opacity: 1;
+            font-size: 20px;
+        }
+        h1{
+            font-size: 28px;
+        }
+        body{
+            text-align: center;
+            background-color: #30323D;
+            color:#FFFFFF;
+            padding:20px;
+            font-size: 18px;
+            min-width: 600px;
+        }
+        #start{
+            padding:10px;
+            border-radius: 8px;
+            color:black;
+            font-size: 36px;
+            font-weight: bold;
+            background-color: #32cd32;
+            text-decoration: none;
+            border:2px solid white;
+            padding-left:40px;
+            padding-right:40px;
+            box-shadow: 3px 3px 3px black;
+            transition: background-color linear .25s;
+        }
+        #start:hover{
+            background-color: #adff2f;
+        }
+        #start.stop{
+            background-color:red;
+        }
+        hr{
+            background-color: rgba(255,255,255,.5);
+            height: 1px;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <hr/>
+
+    <h1>The Voices</h1>
+
+    <hr/>
+
+    <div style="position:relative;left:50%;margin-left:-300px;width:600px;">
+        <p style="text-align: left;">I've tried to recreate with this application what it's like to hear voices. The computer voice is much more pleasant than what I hear, less coherent, no emotional inflection, and less specific. Try it out all day long and go to bed to it if you want to walk in my shoes. Then do it for years. My routine is rather erratic as you could imagine.</p>
+
+        <p><b style="text-decoration: underline;">TRIGGER WARNING:</b> May be paranoia inducing or offensive</p>
+    </div>
+
+    <br/>
+
+    <a id="start" href="#" onclick="theVoices.onStartStopClick(0);return false;">START</a>
+
+    <br/>
+    <br/>
+
+    <hr/>
+
+    <h1>History</h1>
+
+    <hr/>
+
+    <div id="history">
+
+    </div>
+
+</body>
+</html>
