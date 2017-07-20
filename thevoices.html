@@ -2,10 +2,7 @@
 <html>
 <head>
     <title>The Voices</title>
-    <script
-            src="https://code.jquery.com/jquery-1.12.4.min.js"
-            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script type="text/javascript">
 
         function TheVoices(){return{
@@ -43,7 +40,6 @@
                 'sister',
                 'mother',
                 'father',
-                'realize',
                 'pirate',
                 'monster'
             ],
@@ -116,7 +112,8 @@
                 'war',
                 'traitor',
                 'pain',
-                'suffering'
+                'suffering',
+                'realize'
             ],
 
             weeksVoices:[
@@ -259,7 +256,9 @@
                     'you are really funny',
                     'and now we have to',
                     'to experience pain',
-                    'to experience psychological pain'
+                    'to experience psychological pain',
+                    'we just don\'t',
+                    'we just can\'t'
                 ],
                 [
                     'this is last weeks voices',
@@ -410,6 +409,7 @@
         #history>p>span{
             opacity:.1;
             font-size: 20px;
+            transition: opacity linear .5s;
         }
         #history>p{
             background-color: rgba(0,0,0,.5);
