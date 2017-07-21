@@ -12,7 +12,258 @@
             lastWasAltVoices:false,
             speech:null,
             cancelled:false,
-            
+
+            init:function(){
+
+                $(window).unload(function() {
+                    window.speechSynthesis.cancel();
+                });
+
+            },
+
+            onStartStopClick:function(week){
+
+                if($('#start').hasClass('stop')){
+                    //stopping
+                    window.speechSynthesis.cancel();
+                    this.cancelled=true;
+                    $('#start').text('START').removeClass('stop');
+                }else{
+                    //starting
+                    this.currentWeek=week;
+                    this.weekVoicesLastI=-1;
+                    this.continueWeek();
+                    $('#start').text('STOP').addClass('stop');
+                }
+
+            },
+
+            continueWeek:function(){
+
+                if(this.cancelled){
+                    this.cancelled=false;
+                    return;
+
+                }
+
+                var i;
+                var len=Math.floor((Math.random()*6))+1;
+                len+=Math.random()<.5?0:Math.floor(Math.random()*6);
+                var speech='';
+                for(i=0;i<len;i++){
+                    speech+=this.getNextSpeech()+' ';
+                }
+
+                try{
+                    this.speech=new SpeechSynthesisUtterance(speech);
+                }catch(error){
+                    alert('Internet Explorer is not supported. Please use the latest version of Firefox or Chrome.');
+                    return;
+                }
+
+                //
+                    var voices=window.speechSynthesis.getVoices();
+                    var voices2=[];
+                    if(voices.length&&voices[i]){
+                        for(i=0;i<len;i++){
+                            if(voices[i].name.toLowerCase().indexOf('david')>=0||voices[i].name.toLowerCase().indexOf('zira')>=0){
+                                voices2.push(voices[i]);
+                            }
+                        }
+                        if(voices2.length){
+                            this.speech.voice=voices2[Math.floor(voices2.length*Math.random())];
+                        }
+                    }
+
+                    this.speech.pitch=.5+Math.random();
+                    this.speech.rate=(Math.random() *.3)+.2;
+                    this.speech.volume=(Math.random() *.7)+.15;
+                //
+
+                window.speechSynthesis.speak(this.speech);
+                this.speech.onend=this.continueWeek.bind(this);
+                this.speech.onboundary=this.onWordSpoken.bind(this);
+
+                speech=speech.split(' ');
+                speech=speech.join('</span> <span>');
+
+                $('#history').prepend('<p><span>'+speech+'</span></p>');
+
+                if($('#history p').length>20){
+                    $('#history p:last-child').remove();
+                }
+
+            },
+
+            onWordSpoken:function(event){
+
+                var highlightWordJq=$('#history>p:first-child>span.highlighted');
+                if(!highlightWordJq.length){
+                    $('#history>p:first-child>span:first-child').addClass('highlighted show');
+                }else{
+                    highlightWordJq.next().addClass('highlighted show');
+                    highlightWordJq.removeClass('highlighted');
+                    if(!highlightWordJq.next().next().length){
+
+                        setTimeout(function(){
+
+                        }.bind(this),1000);
+
+                    }
+                }
+
+            },
+
+            getNextSpeech:function(){
+
+                var r;
+                var msg;
+
+                while(true){
+                    var r=Math.floor(Words.weeksVoices[this.currentWeek].length*Math.random());
+                    if(r!=this.weekVoicesLastI){
+                        break;
+                    }
+                }
+
+                if(this.lastWasAltVoices||Math.random()<.25){
+                    this.weekVoicesLastI=r;
+                    msg=Words.weeksVoices[this.currentWeek][r];
+                    this.lastWasAltVoices=false;
+                }else if(Math.random()<.5){
+                    r=Math.floor(Math.random()*Words.randomWords.length);
+                    msg=Words.randomWords[r];
+                    this.lastWasAltVoices=true;
+                }else if(Math.random()<.5){
+                    r=Math.floor(Math.random()*Words.randomNamesOfNoImportanceToMeBecauseAnonymityButTheRealVoicesUseNamesRelevantToMe.length);
+                    msg=Words.randomNamesOfNoImportanceToMeBecauseAnonymityButTheRealVoicesUseNamesRelevantToMe[r];
+                    this.lastWasAltVoices=true;
+                }else{
+                    r=Math.floor(Math.random()*Words.repeatedAnnoyingWords.length);
+                    msg=Words.repeatedAnnoyingWords[r];
+                    this.lastWasAltVoices=true;
+                }
+
+                return msg;
+
+            }
+        }}
+
+        var theVoices=new TheVoices();
+
+        $(document).ready(function(){
+
+            theVoices.init();
+
+        });
+
+    </script>
+
+    <style>
+        #history>p>span.highlighted{
+            text-decoration:underline;
+        }
+        #history>p>span{
+            opacity:.05;
+            font-size: 20px;
+            transition: opacity linear .5s;
+        }
+        #history>p{
+            background-color: rgba(0,0,0,.5);
+            padding:10px;
+            border-radius: 8px;
+            margin-left:40px;
+            margin-right:40px;
+            text-align: left;
+        }
+        #history>p>span.show{
+            opacity: 1;
+            font-size: 20px;
+        }
+        h1{
+            font-size: 28px;
+        }
+        body{
+            text-align: center;
+            background-color: #30323D;
+            color:#FFFFFF;
+            padding:20px;
+            font-size: 18px;
+            min-width: 600px;
+        }
+        #start{
+            padding:10px;
+            border-radius: 8px;
+            color:black;
+            font-size: 36px;
+            font-weight: bold;
+            background-color: #32cd32;
+            text-decoration: none;
+            border:2px solid white;
+            padding-left:40px;
+            padding-right:40px;
+            box-shadow: 3px 3px 3px black;
+            transition: background-color linear .25s;
+        }
+        #start:hover{
+            background-color: #adff2f;
+        }
+        #start.stop{
+            background-color:red;
+        }
+        hr{
+            background-color: rgba(255,255,255,.5);
+            height: 1px;
+            border: 0;
+        }
+        #topText{
+            position:relative;
+            left:50%;
+            margin-left:-300px;
+            width:600px;
+        }
+    </style>
+
+</head>
+
+    <body>
+
+        <hr/>
+
+        <h1>The Voices</h1>
+
+        <hr/>
+
+        <div id="topText">
+            <p style="text-align: left;">I've tried to recreate with this application what it's like to hear voices. The computer voice is much more pleasant than what I hear, less coherent, no emotional inflection, less specific, and clearer. Often the voices will start a sentence and not finish it spurring the imagination. It is not always easy to put together the phrases and words I hear. They are fuzzy, patterned like speech, and bassy. My brain is stuck trying to decipher this nonstop noise, oddly it goes away for days or weeks on a rare occasion for no reason that I can comprehend. Try it out all day long and go to bed to it if you want to walk in my shoes. Then do it for years. My routine is rather erratic as you could imagine.</p>
+            <p style="text-align: left;">I'm surprised to find that this program is a welcome distraction from what I hear in my own head and can be humorous. I've had trouble finding good background noise distractions in the media and I want to explore this more.</p>
+
+            <p><b style="text-decoration: underline;">TRIGGER WARNING:</b> May be paranoia inducing or offensive</p>
+        </div>
+
+        <br/>
+
+        <a id="start" href="#" onclick="theVoices.onStartStopClick(0);return false;">START</a>
+
+        <br/>
+        <br/>
+
+        <hr/>
+
+        <h1>History</h1>
+
+        <hr/>
+
+        <div id="history">
+
+        </div>
+
+    </body>
+
+    <script type="text/javascript">
+    
+        var Words={
+
             randomWords:[
                 'miner',
                 'slime',
@@ -1861,244 +2112,10 @@
                     'this is last weeks voices',
                     'number two'
                 ]
-            ],
+            ]    
 
-            init:function(){
-
-                $(window).unload(function() {
-                    window.speechSynthesis.cancel();
-                });
-
-            },
-
-            onStartStopClick:function(week){
-                if($('#start').hasClass('stop')){
-                    //stopping
-                    window.speechSynthesis.cancel();
-                    this.cancelled=true;
-                    $('#start').text('START').removeClass('stop');
-                }else{
-                    //starting
-                    this.currentWeek=week;
-                    this.weekVoicesLastI=-1;
-                    this.continueWeek();
-                    $('#start').text('STOP').addClass('stop');
-                }
-
-            },
-
-            continueWeek:function(){
-
-                if(this.cancelled){
-                    this.cancelled=false;
-                    return;
-
-                }
-
-                var i;
-                var len=Math.floor((Math.random()*6))+1;
-                len+=Math.random()<.5?0:Math.floor(Math.random()*6);
-                var speech='';
-                for(i=0;i<len;i++){
-                    speech+=this.getNextSpeech()+' ';
-                }
-
-                try{
-                    this.speech=new SpeechSynthesisUtterance(speech);
-                }catch(error){
-                    alert('Internet Explorer is not supported. Please use the latest version of Firefox or Chrome.');
-                    return;
-                }
-
-                //
-                    var voices=window.speechSynthesis.getVoices();
-                    var voices2=[];
-                    if(voices.length&&voices[i]){
-                        for(i=0;i<len;i++){
-                            if(voices[i].name.toLowerCase().indexOf('david')>=0||voices[i].name.toLowerCase().indexOf('zira')>=0){
-                                voices2.push(voices[i]);
-                            }
-                        }
-                        if(voices2.length){
-                            this.speech.voice=voices2[Math.floor(voices2.length*Math.random())];
-                        }
-                    }
-
-                    this.speech.pitch=.5+Math.random();
-                    this.speech.rate=(Math.random() *.3)+.2;
-                    this.speech.volume=(Math.random() *.7)+.15;
-                //
-
-                window.speechSynthesis.speak(this.speech);
-                this.speech.onend=this.continueWeek.bind(this);
-                this.speech.onboundary=this.onWordSpoken.bind(this);
-
-                speech=speech.split(' ');
-                speech=speech.join('</span> <span>');
-
-                $('#history').prepend('<p><span>'+speech+'</span></p>');
-
-                if($('#history p').length>20){
-                    $('#history p:last-child').remove();
-                }
-
-            },
-
-            onWordSpoken:function(event){
-                var highlightWordJq=$('#history>p:first-child>span.highlighted');
-                if(!highlightWordJq.length){
-                    $('#history>p:first-child>span:first-child').addClass('highlighted show');
-                }else{
-                    highlightWordJq.next().addClass('highlighted show');
-                    highlightWordJq.removeClass('highlighted');
-                    if(!highlightWordJq.next().next().length){
-
-                        setTimeout(function(){
-
-                        }.bind(this),1000);
-
-                    }
-                }
-            },
-
-            getNextSpeech:function(){
-
-                var r;
-                var msg;
-
-                while(true){
-                    var r=Math.floor(this.weeksVoices[this.currentWeek].length*Math.random());
-                    if(r!=this.weekVoicesLastI){
-                        break;
-                    }
-                }
-
-                if(this.lastWasAltVoices||Math.random()<.25){
-                    this.weekVoicesLastI=r;
-                    msg=this.weeksVoices[this.currentWeek][r];
-                    this.lastWasAltVoices=false;
-                }else if(Math.random()<.5){
-                    r=Math.floor(Math.random()*this.randomWords.length);
-                    msg=this.randomWords[r];
-                    this.lastWasAltVoices=true;
-                }else if(Math.random()<.5){
-                    r=Math.floor(Math.random()*this.randomNamesOfNoImportanceToMeBecauseAnonymityButTheRealVoicesUseNamesRelevantToMe.length);
-                    msg=this.randomNamesOfNoImportanceToMeBecauseAnonymityButTheRealVoicesUseNamesRelevantToMe[r];
-                    this.lastWasAltVoices=true;
-                }else{
-                    r=Math.floor(Math.random()*this.repeatedAnnoyingWords.length);
-                    msg=this.repeatedAnnoyingWords[r];
-                    this.lastWasAltVoices=true;
-                }
-
-                return msg;
-            }
-
-        }}
-
-        var theVoices=new TheVoices();
-
-        $(document).ready(function(){
-
-            theVoices.init();
-
-        });
+        }
 
     </script>
-
-    <style>
-        #history>p>span.highlighted{
-            text-decoration:underline;
-        }
-        #history>p>span{
-            opacity:.05;
-            font-size: 20px;
-            transition: opacity linear .5s;
-        }
-        #history>p{
-            background-color: rgba(0,0,0,.5);
-            padding:10px;
-            border-radius: 8px;
-            margin-left:40px;
-            margin-right:40px;
-            text-align: left;
-        }
-        #history>p>span.show{
-            opacity: 1;
-            font-size: 20px;
-        }
-        h1{
-            font-size: 28px;
-        }
-        body{
-            text-align: center;
-            background-color: #30323D;
-            color:#FFFFFF;
-            padding:20px;
-            font-size: 18px;
-            min-width: 600px;
-        }
-        #start{
-            padding:10px;
-            border-radius: 8px;
-            color:black;
-            font-size: 36px;
-            font-weight: bold;
-            background-color: #32cd32;
-            text-decoration: none;
-            border:2px solid white;
-            padding-left:40px;
-            padding-right:40px;
-            box-shadow: 3px 3px 3px black;
-            transition: background-color linear .25s;
-        }
-        #start:hover{
-            background-color: #adff2f;
-        }
-        #start.stop{
-            background-color:red;
-        }
-        hr{
-            background-color: rgba(255,255,255,.5);
-            height: 1px;
-            border: 0;
-        }
-    </style>
-
-</head>
-
-    <body>
-
-        <hr/>
-
-        <h1>The Voices</h1>
-
-        <hr/>
-
-        <div style="position:relative;left:50%;margin-left:-300px;width:600px;">
-            <p style="text-align: left;">I've tried to recreate with this application what it's like to hear voices. The computer voice is much more pleasant than what I hear, less coherent, no emotional inflection, less specific, and clearer. Often the voices will start a sentence and not finish it spurring the imagination. It is not always easy to put together the phrases and words I hear. They are fuzzy, patterned like speech, and bassy. My brain is stuck trying to decipher this nonstop noise, oddly it goes away for days or weeks on a rare occasion for no reason that I can comprehend. Try it out all day long and go to bed to it if you want to walk in my shoes. Then do it for years. My routine is rather erratic as you could imagine.</p>
-            <p style="text-align: left;">I'm surprised to find that this program is a welcome distraction from what I hear in my own head and can be humorous. I've had trouble finding good background noise distractions in the media and I want to explore this more.</p>
-
-            <p><b style="text-decoration: underline;">TRIGGER WARNING:</b> May be paranoia inducing or offensive</p>
-        </div>
-
-        <br/>
-
-        <a id="start" href="#" onclick="theVoices.onStartStopClick(0);return false;">START</a>
-
-        <br/>
-        <br/>
-
-        <hr/>
-
-        <h1>History</h1>
-
-        <hr/>
-
-        <div id="history">
-
-        </div>
-
-    </body>
 
 </html>
