@@ -5,6 +5,7 @@ A Simulation of hearing voices.
 ## Libraries
 
 * [MIDI.js](https://github.com/mudcube/MIDI.js/)
+* [jQuery](https://github.com/jquery/jquery)
 * [Web MIDI API](http://webaudio.github.io/web-midi-api/): W3C proposal by Jussi Kalliokoski & Chris Wilson
 * [Web Audio API](https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html): W3C proposal by Chris Rogers
 * [&lt;audio&gt;](http://dev.w3.org/html5/spec/Overview.html): HTML5 specs
