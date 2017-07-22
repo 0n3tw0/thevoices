@@ -1,5 +1,7 @@
 # thevoices
 
+A Simulation of hearing voices.
+
 ## Libraries
 
 * [MIDI.js](https://github.com/mudcube/MIDI.js/)
