@@ -27,15 +27,12 @@
                     }
                 });
 
-
-
                 $(window).resize(function(){
                     if( window.innerHeight == screen.height) {
                         $('body').addClass('fullscreen');
                     }else{
                         $('body').removeClass('fullscreen');
                     }
-
                 });
 
             },
@@ -66,7 +63,6 @@
                 if(this.cancelled){
                     this.cancelled=false;
                     return;
-
                 }
 
                 var i;
@@ -111,6 +107,7 @@
                 speech=speech.join('</span> <span>');
 
                 $('#history').prepend('<p><span>'+speech+'</span></p>');
+                $('#history>p:first-child').hide().fadeIn();
 
                 if($('#history p').length>20){
                     $('#history p:last-child').remove();
@@ -209,6 +206,9 @@
     </script>
 
     <style>
+        body.fullscreen{
+            overflow:hidden;
+        }
         #history>p>span.highlighted{
             text-decoration:underline;
         }
@@ -220,9 +220,17 @@
             font-size: 36px;
             transition: opacity linear .5s;
         }
+        body.fullscreen #history>p{
+            word-spacing: 8px;
+            padding:30px;
+        }
+        #history>p:not(:first-child){
+            opacity:.25;
+        }
         #history>p{
             background-color: rgba(0,0,0,.5);
             padding:18px;
+            word-spacing: 4px;
             border-radius: 8px;
 
             text-align: left;
@@ -692,6 +700,8 @@
                     'don\'t let it get worse',
                     'we are comforting you',
                     'accept our comfort',
+                    'accept our kindness',
+                    'accept our hospitality',
                     'this is necessary',
                     'do what is right',
                     'which is right',
@@ -807,7 +817,10 @@
                     'remain optimistic',
                     'this is what we do to people on',
                     'they are some of the most',
-                    'thank you'
+                    'thank you',
+                    'you are not serious enough',
+                    'you are not taking us serious',
+                    'defense mechanism'
 
                 ],
                 [
