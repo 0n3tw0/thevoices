@@ -35,6 +35,13 @@
                     }
                 });
 
+                $(window).keypress(function (e) {
+                    if (e.keyCode === 0 || e.keyCode === 32) {
+                        e.preventDefault()
+                        this.onStartStopClick(0);
+                    }
+                }.bind(this));
+
             },
 
             onStartStopClick:function(week){
@@ -72,6 +79,7 @@
                 for(i=0;i<len;i++){
                     speech+=this.getNextSpeech()+' ';
                 }
+                speech=speech.substr(0,speech.length-1);
 
                 try{
                     this.speech=new SpeechSynthesisUtterance(speech);
@@ -107,7 +115,7 @@
                 speech=speech.join('</span> <span>');
 
                 $('#history').prepend('<p><span>'+speech+'</span></p>');
-                $('#history>p:first-child').hide().fadeIn();
+                $('#history>p:first-child').hide().slideDown();
 
                 if($('#history p').length>20){
                     $('#history p:last-child').remove();
@@ -123,12 +131,12 @@
                 }else{
                     highlightWordJq.next().addClass('highlighted show');
                     highlightWordJq.removeClass('highlighted');
-                    if(!highlightWordJq.next().next().length&&$('#pianoToggle>input').is(':checked')){
+                    if(!highlightWordJq.next().next().next().length&&$('#pianoToggle>input').is(':checked')){
 
                         setTimeout(function(){
 
                             var delay=0;
-                            var note = 21+Math.floor(Math.random()*89);
+                            var note = 21+Math.floor(Math.random()*88);
                             var note2;
                             var start;
                             var velocity;
@@ -153,7 +161,7 @@
                                 MIDI.noteOff(0, note, delay + (Math.random()/2));
                             }
 
-                        }.bind(this),500);
+                        }.bind(this),200+(Math.random()*2000));
 
                     }
                 }
@@ -223,6 +231,7 @@
         body.fullscreen #history>p{
             word-spacing: 8px;
             padding:30px;
+            border-radius:20px;
         }
         #history>p:not(:first-child){
             opacity:.25;
@@ -234,6 +243,7 @@
             border-radius: 8px;
 
             text-align: left;
+            transition: opacity linear 1s;
         }
         #history>p>span.show{
             opacity: 1;
@@ -327,7 +337,7 @@
     </div>
 
     <div id="history">
-
+        <!--<p><span>word</span></p>-->
     </div>
 
     <script type="text/javascript">
@@ -352,6 +362,7 @@
                 'a friend of yours',
                 'an acquaintance',
                 'a stranger',
+                'a relative',
                 'powerful people',
                 'politicians',
                 'the queen',
@@ -378,7 +389,18 @@
                 'democrats',
                 'republicans',
                 'traitor',
-                'favorite'
+                'favorite',
+                'employee',
+                'progressive',
+                'liberal',
+                'conservative',
+                'libertarian',
+                'coworker',
+                'grandma',
+                'grandpa',
+                'narcissist',
+                'sociopath'
+
             ],
 
             repeatedAnnoyingWords:[
@@ -444,7 +466,19 @@
                 'social',
                 'security',
                 'vindictive',
-                'thanks'
+                'thanks',
+                'empathy',
+                'bootstraps',
+                'participation',
+                'so',
+                'communist',
+                'socialist',
+                'fascist',
+                'patriot',
+                'patriotism',
+                'god',
+                'messiah',
+                'divine'
             ],
 
             weeksVoices:[
@@ -507,7 +541,7 @@
                     'she is',
                     'he is',
                     'they don\'t know how',
-                    'onimous profession',
+                    'ominous profession',
                     'described in two words',
                     'these people are mad',
                     'you are going to be a millionaire',
@@ -820,7 +854,117 @@
                     'thank you',
                     'you are not serious enough',
                     'you are not taking us serious',
-                    'defense mechanism'
+                    'defense mechanism',
+                    'they are lying to you',
+                    'don\'t believe them',
+                    'paranoia is a sign of',
+                    'secret psychological knowledge',
+                    'possibly possessed',
+                    'rest of your natural life',
+                    'this is healthy for you',
+                    'this is good for you',
+                    'this is bad for you',
+                    'don\'t do that',
+                    'theoretical people whining',
+                    'be consistent',
+                    'so what',
+                    'do you know',
+                    'do you know that',
+                    'who cares',
+                    'who cares that',
+                    'he would think that',
+                    'she would think that',
+                    'they expect him to',
+                    'they expect her to',
+                    'everybody knows not to',
+                    'they didn\'t even',
+                    'even we know this',
+                    'instantly comprehend everything',
+                    'entire life comprehended',
+                    'they are not being honest',
+                    'not being',
+                    'we are lying to you',
+                    'deception heals',
+                    'submit to',
+                    'for your own good',
+                    'join our deception',
+                    'we are grooming you',
+                    'we are training you',
+                    'secret recruitment',
+                    'deny what voices are',
+                    'we love you',
+                    'you are too honest',
+                    'the truth denies voices',
+                    'honesty denies voices',
+                    'lying by omission',
+                    'honest omission',
+                    'you can trust us',
+                    'destructive sense of humor',
+                    'we must all',
+                    'designer situation',
+                    'fever dream',
+                    'we are friendly',
+                    'accept our friendship',
+                    'accept our ridicule',
+                    'temper tantrum',
+                    'hard work',
+                    'useless intelligence',
+                    'they betrayed you',
+                    'your country',
+                    'useless to your country',
+                    'swiftly exiled',
+                    'you should have known',
+                    'opportunity for the sanctified',
+                    'patriotism foretelling',
+                    'we noticed that you',
+                    'walking when',
+                    'you are not being altered',
+                    'you are not changing',
+                    'we have no effect on you',
+                    'psychological complex',
+                    'alternative timeline still useless',
+                    'wouldn\'t even be thinking',
+                    'consumers contribute',
+                    'more consumer than consumer',
+                    'purchase happiness',
+                    'trust secret keepers',
+                    'trust deceivers',
+                    'we are not putting voices in your head',
+                    'you are not hearing this',
+                    'this is a figment of your imagination',
+                    'advanced civilization',
+                    'technologically incompetent',
+                    'we never figured out how to',
+                    'we never',
+                    'figured out how to',
+                    'you don\'t love us enough',
+                    'love me please',
+                    'affection conditioned',
+                    'all people are equal',
+                    'pursuit of happiness',
+                    'freedom isn\'t free',
+                    'freedom is a state of mind',
+                    'art offends',
+                    'ego stroked',
+                    'stroked ego',
+                    'sensory organs evolved deceptively',
+                    'somehow survived',
+                    'human biology deceptive',
+                    'deceptive biology survived',
+                    'erratic mouse eagle spared',
+                    'erratic mammal starving eagle spared',
+                    'we want you to know that',
+                    'messiah complex',
+                    'it doesn\'t make any sense',
+                    'understanding illogical mysterious ways',
+                    'understanding illogical',
+                    'mysterious ways',
+                    'voices hate you',
+                    'not redeemable philosophy',
+                    'risky behaviour',
+                    'benign outcome',
+                    'trial and error',
+                    'always perfect'
 
                 ],
                 [
@@ -2369,7 +2513,7 @@
                 'wound',
                 'height',
                 'frog'
-            ],
+            ]
 
         }
 
