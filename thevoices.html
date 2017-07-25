@@ -77,7 +77,7 @@
                 len+=Math.random()<.5?0:Math.floor(Math.random()*4);
                 var speech='';
                 for(i=0;i<len;i++){
-                    speech+=this.getNextSpeech()+' ';
+                    speech+=this.getNextSpeech(i)+' ';
                 }
                 speech=speech.substr(0,speech.length-1);
 
@@ -168,7 +168,7 @@
 
             },
 
-            getNextSpeech:function(){
+            getNextSpeech:function(i){
 
                 var r;
                 var msg;
@@ -236,14 +236,15 @@
         #history>p:not(:first-child){
             opacity:.25;
         }
+
         #history>p{
             background-color: rgba(0,0,0,.5);
             padding:18px;
-            word-spacing: 4px;
+            word-spacing: 3px;
             border-radius: 8px;
 
             text-align: left;
-            transition: opacity linear 1s;
+            transition: opacity linear .25s;
         }
         #history>p>span.show{
             opacity: 1;
@@ -251,39 +252,42 @@
         h1{
             font-size: 38px;
             font-weight: normal;
+            font-family: Arial;
         }
         body{
             text-align: center;
             background-color: #30323D;
             color:#FFFFFF;
-            padding-left:20px;
-            padding-right:20px;
+            margin:20px;
             font-size: 18px;
             min-width: 600px;
         }
         #start{
             padding:10px;
             border-radius: 8px;
-            color:black;
+            color:white;
             font-size: 36px;
             font-weight: bold;
             background-color: #32cd32;
             text-decoration: none;
-            border:2px solid white;
+            border:4px solid white;
             padding-left:40px;
             padding-right:40px;
             box-shadow: 3px 3px 3px black;
-            transition: background-color linear .25s;
+
+            transition: box-shadow linear .25s;
+            font-family:Arial;
         }
         #start:hover{
-            background-color: #adff2f;
+            box-shadow: 6px 6px 60px black;
+
         }
         #start.stop{
             background-color:red;
         }
         hr{
             background-color: rgba(255,255,255,.5);
-            height: 1px;
+            height: 2px;
             border: 0;
         }
         #topText{
@@ -291,7 +295,7 @@
             left:50%;
             margin-left:-300px;
             width:600px;
-            font-size: 22px;
+            font-size: 20px;
         }
         #pianoToggle{
             font-size: 24px;
@@ -352,7 +356,6 @@
                 'edith',
                 'lena',
                 'archie',
-                'bertha',
                 'mabel',
                 'albert',
                 'earl',
@@ -399,7 +402,14 @@
                 'grandpa',
                 'narcissist',
                 'sociopath',
-                'name'
+                'name',
+                'man',
+                'woman',
+                'president',
+                'dude',
+                'idiocrat',
+                'american',
+                'wannabe'
 
             ],
 
@@ -514,7 +524,21 @@
                 'trivial',
                 'shock',
                 'crying',
-                'overseas'
+                'overseas',
+                'code',
+                'person',
+                'chicken',
+                'cow',
+                'pig',
+                'fish',
+                'email',
+                'media',
+                'social',
+                'whining',
+                'complaining',
+                'possibility',
+                'cooperate',
+                'desperate'
             ],
 
             weeksVoices:[
@@ -823,6 +847,9 @@
                     'it is the same as',
                     'thinking selfishly',
                     'this is exactly what',
+                    'exactly what we',
+                    'exactly what',
+                    'this is exactly',
                     'this is what happens',
                     'they knew exactly what',
                     'we know exactly how',
@@ -902,7 +929,7 @@
                     'they are some of the most',
                     'thank you',
                     'you are not serious enough',
-                    'you are not taking us serious',
+                    'you are not taking us seriously',
                     'defense mechanism',
                     'they are lying to you',
                     'don\'t believe them',
@@ -976,6 +1003,7 @@
                     'we have no effect on you',
                     'psychological complex',
                     'alternative timeline still useless',
+                    'useless theoretical timeline',
                     'wouldn\'t even be thinking',
                     'consumers contribute',
                     'more consumer than consumer',
@@ -985,6 +1013,7 @@
                     'we are not putting voices in your head',
                     'you are not hearing this',
                     'this is a figment of your imagination',
+                    'this is your imagination',
                     'advanced civilization',
                     'technologically incompetent',
                     'we never figured out how to',
@@ -1027,9 +1056,7 @@
                     'justice for some',
                     'liberty or voices',
                     'subtle patriotism change',
-                    'deception begets honesty',
                     'deception begets',
-                    'genius misleads',
                     'forced debate',
                     'taken seriously',
                     'what is the truth',
@@ -1086,7 +1113,140 @@
                     'you are not faking',
                     'you should be working',
                     'we all work with voices in our head',
-                    'voices instill kindness'
+                    'voices instill kindness',
+                    'never question',
+                    'you would have',
+                    'it\'s not a problem',
+                    'don\'t know why',
+                    'a friend of a friend',
+                    'a friend said that',
+                    'not genuine enough',
+                    'this is not a pyramid scheme',
+                    'three minutes late',
+                    'two minutes late',
+                    'a single minute late',
+                    'who are you talking to',
+                    'stop talking',
+                    'stop talking to me',
+                    'social life',
+                    'plot and',
+                    'scheme and',
+                    'this is a clue',
+                    'they gave you a clue',
+                    'we warned you',
+                    'we warned you that',
+                    'they tried to',
+                    'they tried to warn you',
+                    'let me think',
+                    'give me a minute to think',
+                    'we are not making you',
+                    'we are not making you self conscious',
+                    'self conscious',
+                    'this is a conspiracy',
+                    'this is not a conspiracy',
+                    'conspiracy theory',
+                    'realm of possibility',
+                    'realm of',
+                    'in my head',
+                    'stealing ideas',
+                    'stealing my ideas',
+                    'get through to them',
+                    'and then they would',
+                    'he thinks that',
+                    'she thinks that',
+                    'all you had to do is',
+                    'so why',
+                    'why would you',
+                    'it is not your fault',
+                    'and because',
+                    'why would you radicalize',
+                    'why would you try to radicalize',
+                    'some of the smartest',
+                    'this is poetry',
+                    'in an oppressive society',
+                    'this is what they said',
+                    'we said this would happen',
+                    'we want you to',
+                    'we cannot radicalize',
+                    'we do not radicalize',
+                    'born evil',
+                    'born good',
+                    'there is no reason',
+                    'do not understand',
+                    'you don\'t understand',
+                    'why can\'t you understand',
+                    'a strange alliance',
+                    'look at that look',
+                    'I have to talk to you',
+                    'voices affect art freedom',
+                    'voices force artistic expression freedom',
+                    'forced multi mind artistic expression',
+                    'voices dominating submit',
+                    'dominating voices induce submission',
+                    'dominating voices induce submissive personality',
+                    'we gave you voices submit',
+                    'submit to unknown belief system',
+                    'submit to unknown ideology',
+                    'more frightening advanced technology',
+                    'frightening technology',
+                    'than this',
+                    'denied ethics',
+                    'technologically frightening escalation',
+                    'more frightening',
+                    'this is for your own good',
+                    'that is what they said',
+                    'why don\'t you trust us',
+                    'you should trust us',
+                    'why can\'t you fall asleep',
+                    'go to sleep',
+                    'you should be sleeping',
+                    'can I borrow your',
+                    'indoctrinated american',
+                    'you were not indoctrinated',
+                    'freedom on sale',
+                    'lies taught not indoctrination',
+                    'future war efficient',
+                    'future war efficient objectors identified',
+                    'pacifists identified',
+                    'future war efficient',
+                    'objectors identified',
+                    'we will always be perfect',
+                    'next generation voices groomed',
+                    'next generation',
+                    'voices groomed',
+                    'hearing voices does not make you paranoid',
+                    'hearing voices does not make you delusional',
+                    'hearing voices does not make you suicidal',
+                    'hearing voices does not give you insomnia',
+                    'dehydration starvation or sleep deprivation',
+                    'biology destroyed infrastructure intact',
+                    'wannabe voices inspire talented artist',
+                    'does not make you',
+                    'improved medication',
+                    'headache pill takes effect months later',
+                    'this makes sense',
+                    'this does not make sense',
+                    'that is not what we',
+                    'we did not intend',
+                    'this is not',
+                    'they are going to',
+                    'walking away',
+                    'artificial intelligence',
+                    'paranoia suspicion reflected',
+                    'suspicion is paranoia',
+                    'sanctified paranoia',
+                    'we dominated language itself',
+                    'domination of language undesirable',
+                    'domination of language',
+                    'language technology of our ancestors',
+                    'abuse of technology',
+                    'we are not abusing technology',
+                    'social media',
+                    'climb the ladder',
+                    'this is an opportunity',
+                    'you are important to us',
+                    'more fulfilling career',
+                    'help people'
                 ],
                 [
                     'this is last weeks voices',
@@ -1285,7 +1445,6 @@
                 'neutral',
                 'advocate',
                 'stand',
-                'dash',
                 'background',
                 'seller',
                 'commerce',
@@ -1572,7 +1731,6 @@
                 'pit',
                 'coup',
                 'mild',
-                'subway',
                 'retailer',
                 'blue',
                 'bundle',
@@ -1806,7 +1964,6 @@
                 'formation',
                 'rebel',
                 'appoint',
-                'slave',
                 'available',
                 'foundation',
                 'style',
