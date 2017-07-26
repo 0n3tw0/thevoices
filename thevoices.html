@@ -73,13 +73,14 @@
                 }
 
                 var i;
-                var len=Math.floor((Math.random()*4))+1;
-                len+=Math.random()<.5?0:Math.floor(Math.random()*4);
+                var len=Math.floor((Math.random()*3))+1;
+                len+=Math.random()<.5?0:Math.floor(Math.random()*3);
                 var speech='';
                 for(i=0;i<len;i++){
                     speech+=this.getNextSpeech(i)+' ';
                 }
                 speech=speech.substr(0,speech.length-1);
+                speech=this.getEndSpeech(speech);
 
                 try{
                     this.speech=new SpeechSynthesisUtterance(speech);
@@ -121,6 +122,22 @@
                     $('#history p:last-child').remove();
                 }
 
+            },
+
+            getEndSpeech:function(speech){
+                var endWords=['and','the','a','that','you','to','are','is','so','can\'t'];
+                var i;
+                var len=endWords.length;
+                for(i=0;i<len;i++){
+                    if(speech.lastIndexOf(endWords[i])==speech.length-endWords[i].length){
+                        if(Math.random()<.25){
+                            break;
+                        }
+                        speech+=' '+this.getNextSpeech();
+                        i=-1;
+                    }
+                }
+                return speech;
             },
 
             onWordSpoken:function(event){
@@ -359,16 +376,8 @@
                 'mabel',
                 'albert',
                 'earl',
-                'a person in the past',
-                'a family member',
-                'a friend of yours',
-                'an acquaintance',
-                'a stranger',
-                'a relative',
-                'powerful people',
-                'politicians',
-                'the queen',
-                'the king',
+                'acquaintance',
+                'politician',
                 'ancestors',
                 'brother',
                 'sister',
@@ -386,12 +395,11 @@
                 'government',
                 'psychopath',
                 'schizophrenic',
-                'psychological expert',
+                'expert',
                 'capitalists',
                 'democrats',
                 'republicans',
                 'traitor',
-                'favorite',
                 'employee',
                 'progressive',
                 'liberal',
@@ -407,14 +415,14 @@
                 'woman',
                 'president',
                 'dude',
-                'idiocrat',
                 'american',
-                'wannabe',
-                'official'
+                'official',
+                'slime'
 
             ],
 
             repeatedAnnoyingWords:[
+                'celebrity',
                 'depression',
                 'suicide',
                 'taxes',
@@ -430,8 +438,8 @@
                 'debt',
                 'healthcare',
                 'induced',
-                'multiple personalities',
-                'auditory hallucinations',
+                'personalities',
+                'auditory',
                 'escalation',
                 'paranoia',
                 'paranoid',
@@ -466,7 +474,6 @@
                 'suffering',
                 'realize',
                 'hypochondria',
-                'micro managing',
                 'insomnia',
                 'deadline',
                 'hint',
@@ -517,20 +524,18 @@
                 'exist',
                 'new',
                 'why',
-                'test',
-                'position',
                 'covert',
                 'penalty',
                 'psychotic',
                 'trivial',
                 'shock',
                 'crying',
+                'dying',
                 'overseas',
                 'code',
                 'person',
                 'chicken',
                 'cow',
-                'pig',
                 'fish',
                 'email',
                 'media',
@@ -558,11 +563,17 @@
                 'seventies',
                 'eighties',
                 'nineties',
+                'people',
+                'politicians',
                 'subprime',
                 'noisy',
                 'violation',
-                'headaches'
+                'headache',
+                'powerful'
+
             ],
+
+            //add +, micro manage each phrase addition begining end
 
             weeksVoices:[
                 [
@@ -978,7 +989,7 @@
                     'they expect him to',
                     'they expect her to',
                     'everybody knows not to',
-                    'they didn\'t even',
+                    'they didn\'t even so',
                     'even we know this',
                     'instantly comprehend everything',
                     'entire life comprehended',
@@ -1217,9 +1228,9 @@
                     'hearing voices does not make you delusional',
                     'hearing voices does not make you suicidal',
                     'hearing voices does not give you insomnia',
-                    'dehydration starvation or sleep deprivation',
+                    'sleep deprivation',
                     'biology destroyed infrastructure intact',
-                    'wannabe voices inspire talented artist',
+                    'voices inspire talented artist',
                     'does not make you',
                     'improved medication',
                     'we don\'t know why',
@@ -1419,6 +1430,7 @@
                     'capability denied',
                     'deemed unworthy',
                     'for no reason',
+                    'accumulation of media',
                     'centuries into the future',
                     'decades into the future',
                     'the culmination of',
@@ -1432,9 +1444,10 @@
                     'this is non lethal',
                     'nobody ever died hearing voices in their head',
                     'nobody ever',
-                    'non lethal weapons cannot assault',
+                    'non lethal weapons cannot',
                     'you deserve this',
-                    'our persistence your pain',
+                    'our persistence is',
+                    'your pain is',
                     'they are millionaires',
                     'we are millionaires',
                     'she is a millionaire',
@@ -1442,9 +1455,10 @@
                     'a billion dollars',
                     'ominous amount of',
                     'money hoarded',
-                    'subprime mortgage',
                     'because you think',
                     'secrets in media',
+                    'hints in the media',
+                    'messages in the media',
                     'media secrets',
                     'fictional reality',
                     'do not',
@@ -1488,6 +1502,8 @@
                     'they always try to',
                     'they already knew',
                     'constantly changing antagonizing speech',
+                    'constantly changing',
+                    'antagonizing speech',
                     'because even though',
                     'that is all they think about',
                     'driving by me',
@@ -1499,10 +1515,18 @@
                     'transmit voices into your head',
                     'wanted to be',
                     'rather have been',
-                    'terrified thrive evolution survived',
                     'sounds like nonsense',
-                    'that\'s all you have to do'
-
+                    'that\'s all you have to do',
+                    'a person in the past said that',
+                    'a family member said that',
+                    'a friend of yours said that',
+                    'the queen said that',
+                    'the king said that',
+                    'an aquaintence said that',
+                    'that is all it takes to',
+                    'all it takes to',
+                    'walking while',
+                    'texting while'
 
                 ],
                 [
