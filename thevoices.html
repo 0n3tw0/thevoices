@@ -126,9 +126,15 @@
 
             getStartAndEndSpeech:function(speech){
                 while(speech.substr(0,1)=='+'){
+                    if(Math.random()<.25){
+                        break;
+                    }
                     speech=this.getNextSpeech(0)+' '+speech;
                 }
                 while(speech.substr(-1)=='+'){
+                    if(Math.random()<.25){
+                        break;
+                    }
                     speech=speech+' '+this.getNextSpeech(0);
                 }
                 speech=speech.replace(/\+/g,'');
@@ -1491,7 +1497,7 @@
                     'a friend of yours said that+',
                     'the queen said that+',
                     'the king said that+',
-                    'an aquaintence said that+',
+                    'an acquaintance said that+',
                     'that is all it takes to+',
                     '+all it takes to+',
                     'walking while+',
@@ -1507,7 +1513,10 @@
                     'we overheard at work+',
                     'we heard at work+',
                     '+that+',
-                    '+and+'
+                    '+and+',
+                    'all your problems will be solved if you+',
+                    'demand respect',
+                    'bizarre phenomenon'
 
 
                 ],
