@@ -46,7 +46,9 @@
             },
 
             onStartStopClick:function(week){
-
+                if($('#start').text()=='OKAY FINE'){
+                    return;
+                }
                 $('#topText').remove();
 
                 if($('#start').hasClass('stop')){
