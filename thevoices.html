@@ -12,6 +12,7 @@
             lastWasAltVoices:false,
             speech:null,
             cancelled:false,
+            stopButtonTimeout:0,
 
             init:function(){
 
@@ -50,9 +51,21 @@
 
                 if($('#start').hasClass('stop')){
                     //stopping
+                    if($('#start').text()=='STOP'){
+                        $('#start').text('NO!');
+                        this.stopButtonTimeout=setTimeout(function(){
+                            $('#start').text('STOP');
+                        },1000);
+                        return;
+                    }else if($('#start').text()=='NO!'){
+                        clearTimeout(this.stopButtonTimeout);
+                        $('#start').text('OKAY FINE');
+                        setTimeout(function(){
+                            $('#start').text('START').removeClass('stop');
+                        },1000);
+                    }
                     window.speechSynthesis.cancel();
                     this.cancelled=true;
-                    $('#start').text('START').removeClass('stop');
                     $('body').removeClass('started');
                 }else{
                     //starting
@@ -1647,14 +1660,25 @@
                     'we have the capability to+',
                     'evolving capability',
                     'they might figure out that+',
-                    'we are going to figure out',
+                    'we are going to figure out+',
                     'confirmation bias',
                     'but then they start to+',
                     'it has nothing to do with',
                     'we are not keeping you awake',
                     'sleep is not a human right',
                     'human rights',
-                    'sleep is not a+'
+                    'sleep is not a+',
+                    'eye contact',
+                    'brain conditioning',
+                    'then why don\'t you just+',
+                    'because you believe that+',
+                    'because you thought that she+',
+                    'because you thought that he+',
+                    'this is abstract thought',
+                    'induced abstract thought',
+                    'out of order thinking',
+                    'irrelevance brought up',
+                    'what does this have to do with+'
 
 
                 ],
