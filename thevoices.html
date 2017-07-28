@@ -65,6 +65,72 @@
 
             },
 
+            getFullSpeech:function(words,maxSpeechLength){
+                var i;
+                var len=Math.floor(Math.random()*(words/2))+1;
+                var speech;
+                len+=Math.random()<.5?0:Math.floor(Math.random()*(words/2));
+                while(true){
+                    speech='';
+
+                    for(i=0;i<len;i++){
+                        speech+=this.getNextSpeech(i);
+                    }
+
+                    speech=speech.substr(0,speech.length-1);
+                    speech=this.getStartAndEndSpeech(speech);
+                    if(speech.length<=maxSpeechLength){
+                        break;
+                    }
+                }
+                return speech;
+            },
+
+            getFilteredSpeech:function(filters,matches,words,maxSpeechLength){
+                var speech;
+                var i;
+                var len=filters.length;
+                var break2;
+                var match;
+                while(true){
+                    speech=this.getFullSpeech(words,maxSpeechLength);
+                    break2=false;
+                    match=0;
+                    for(i=0;i<len;i++){
+                        if(speech.indexOf(' '+filters[i]+' ')>=0){
+                            match++;
+                            if(match==matches){
+                                break2=true;
+                                break ;
+                            }
+                        }
+                    }
+                    if(break2){
+                        break
+                    }
+                }
+                speech=speech.replace(/  /g,' ').trim()+' ';
+                return speech;
+            },
+
+            getStartAndEndSpeech:function(speech){
+
+                while(speech.trim().substr(0,1)=='+'){
+                    if(Math.random()<.25){
+                        break;
+                    }
+                    speech=this.getNextSpeech(0)+speech;
+                }
+                while(speech.trim().substr(-1)=='+'){
+                    if(Math.random()<.25){
+                        break;
+                    }
+                    speech=speech+this.getNextSpeech(0);
+                }
+                speech=speech.replace(/\+/g,'');
+                return speech;
+            },
+
             continueWeek:function(){
 
                 if(this.cancelled){
@@ -72,15 +138,12 @@
                     return;
                 }
 
-                var i;
-                var len=Math.floor((Math.random()*3))+1;
-                len+=Math.random()<.5?0:Math.floor(Math.random()*3);
-                var speech='';
-                for(i=0;i<len;i++){
-                    speech+=this.getNextSpeech(i)+' ';
+                var speech;
+                if($('#albertToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['nope','fresh','customer','employee','dude','brother','tell you what','man','for real','creep','yo','yup','albert','whatever','no offense but'],3,8,100);
+                }else{
+                    speech=this.getFullSpeech(6,100);
                 }
-                speech=speech.substr(0,speech.length-1);
-                speech=this.getStartAndEndSpeech(speech);
 
                 try{
                     this.speech=new SpeechSynthesisUtterance(speech);
@@ -91,8 +154,10 @@
 
                 //
                     var voices=window.speechSynthesis.getVoices();
+                    var i;
+                    var len=voices.length;
                     var voices2=[];
-                    if(voices.length&&voices[i]){
+                    if(voices.length){
                         for(i=0;i<len;i++){
                             if(voices[i].name.toLowerCase().indexOf('david')>=0||voices[i].name.toLowerCase().indexOf('zira')>=0){
                                 voices2.push(voices[i]);
@@ -114,7 +179,9 @@
 
                 speech=speech.split(' ');
                 speech=speech.join('</span> <span>');
+                speech=speech.replace(/\<span\>\<\/span\>/g,'');
 
+                $('#history>p>span').removeClass('highlighted');
                 $('#history').prepend('<p><span>'+speech+'</span></p>');
                 $('#history>p:first-child').hide().slideDown();
 
@@ -122,23 +189,6 @@
                     $('#history p:last-child').remove();
                 }
 
-            },
-
-            getStartAndEndSpeech:function(speech){
-                while(speech.substr(0,1)=='+'){
-                    if(Math.random()<.25){
-                        break;
-                    }
-                    speech=this.getNextSpeech(0)+' '+speech;
-                }
-                while(speech.substr(-1)=='+'){
-                    if(Math.random()<.25){
-                        break;
-                    }
-                    speech=speech+' '+this.getNextSpeech(0);
-                }
-                speech=speech.replace(/\+/g,'');
-                return speech;
             },
 
             onWordSpoken:function(event){
@@ -216,7 +266,7 @@
                     this.lastWasAltVoices=true;
                 }
 
-                return msg;
+                return ' '+msg+' ';
 
             }
         }}
@@ -315,16 +365,23 @@
             width:600px;
             font-size: 20px;
         }
+        #albertToggle,
         #pianoToggle{
             font-size: 24px;
             margin-left:10px;
         }
+        #albertToggle>input,
         #pianoToggle>input{
             width:20px;
             height:20px;
         }
         body.fullscreen.started #header{
             display:none;
+        }
+        #toggleContainer{
+            display:inline-block;
+            position:relative;
+            text-align:left;
         }
 
     </style>
@@ -349,7 +406,7 @@
 
         <br/>
 
-        <a id="start" href="#" onclick="theVoices.onStartStopClick(0);return false;">START</a> <label id="pianoToggle"><input type="checkbox" checked/> Piano Mode</label>
+        <a id="start" href="#" onclick="theVoices.onStartStopClick(0);return false;">START</a> <div id="toggleContainer"><label id="pianoToggle"><input type="checkbox" checked/> Piano Mode</label><br/><label id="albertToggle"><input type="checkbox"/> Albert's Nightmare</label></div>
 
         <br/>
         <br/>
@@ -418,14 +475,14 @@
                 'dude',
                 'american',
                 'official',
-                'slime'
+                'slime',
+                'creep'
 
             ],
 
             repeatedAnnoyingWords:[
                 'celebrity',
                 'depression',
-                'suicide',
                 'taxes',
                 'medication',
                 'capitalism',
@@ -570,12 +627,30 @@
                 'noisy',
                 'violation',
                 'headache',
-                'powerful'
+                'powerful',
+                'yup',
+                'nope',
+                'yo',
+                'fresh',
+                'true',
+                'false',
+                'risky',
+                'behaviour',
+                'tingle',
+                'provoke',
+                'yeah',
+                'influence',
+                'stocks',
+                'wallstreet',
+                'copyright'
+
 
             ],
 
             weeksVoices:[
                 [
+                    'temporary tingles',
+                    '+for real',
                     'everybody knows that if you+',
                     'this is what happens when you+',
                     'and then they are going to+',
@@ -592,6 +667,8 @@
                     'the state of+',
                     'you don\'t really hear voices in your head',
                     'you don\'t really+',
+                    'she said+',
+                    'he said+',
                     'she said that you+',
                     'he said that you+',
                     'they said that you+',
@@ -781,7 +858,7 @@
                     '+is benign',
                     'you are weak for+',
                     'secret technology doesn\'t exist',
-                    'beauty in this design',
+                    'beauty in this+',
                     'secretly accepted',
                     'secretly condemned',
                     'why wouldn\'t you just+',
@@ -1040,7 +1117,6 @@
                     'figured out how to+',
                     'you don\'t love us enough',
                     'love me please',
-                    'all people are equal',
                     'pursuit of+',
                     'freedom isn\'t+',
                     'ego stroked',
@@ -1054,7 +1130,6 @@
                     'mysterious ways',
                     'risky behaviour',
                     'benign outcome',
-                    'trial and+',
                     'error prone',
                     'always perfect',
                     'electrodes detected response',
@@ -1063,7 +1138,7 @@
                     'there is nothing you can do',
                     'justice for some',
                     'liberty or voices',
-                    'deception begets',
+                    '+begets+',
                     'forced debate',
                     'taken seriously',
                     'what is the truth',
@@ -1354,7 +1429,6 @@
                     '+voices stirred terror',
                     '+voices stirred fear',
                     'insomnia hurts',
-                    'phrase caused temporary body tingles',
                     'there is no other way to communicate',
                     'there was no other way to communicate',
                     'we didn\'t know how to get through to you',
@@ -1370,7 +1444,7 @@
                     'your memory is bad we know that+',
                     'we know that+',
                     'we know that you+',
-                    'false memories',
+                    'accept our reality',
                     'your memory fails you',
                     'don\'t you remember that+',
                     'you were always like this',
@@ -1405,7 +1479,7 @@
                     'capability denied',
                     'deemed unworthy',
                     '+for no reason',
-                    'accumulation of media',
+                    'accumulation of+',
                     'centuries into the future+',
                     'decades into the future+',
                     'the culmination of+',
@@ -1450,9 +1524,6 @@
                     'we think that you are+',
                     'it is always something',
                     'always something',
-                    'forever alone',
-                    'forever judged',
-                    'forever condemned',
                     'even if+',
                     'either way',
                     'don\'t ever',
@@ -1516,7 +1587,46 @@
                     '+and+',
                     'all your problems will be solved if you+',
                     'demand respect',
-                    'bizarre phenomenon'
+                    'bizarre phenomenon',
+                    'oh my',
+                    'keep enemies close',
+                    'in order to',
+                    'thinking out loud',
+                    'working things out',
+                    'was that right',
+                    'do I believe that',
+                    'just because someone+',
+                    'cut me off',
+                    'cut in line',
+                    'held the door',
+                    'took my spot',
+                    'sped by me',
+                    'get some',
+                    'nailed it',
+                    'loving it',
+                    '+is just a theory',
+                    'taken literally',
+                    'reading too much',
+                    'they cannot overlook+',
+                    'minor annoyance',
+                    'cannot overlook+',
+                    'minor frustration',
+                    'they are willing to+',
+                    'they want to+',
+                    'personality summed up by minor annoyance',
+                    'processing complete',
+                    'so why would you+',
+                    'so you thought that+',
+                    'can\'t expect everybody',
+                    'to be understood',
+                    'to understand',
+                    'to understand that',
+                    'they even tried to+',
+                    'tried to',
+                    '+and yet when I+',
+                    'I would+',
+                    '+rather die',
+                    '+rather be dead'
 
 
                 ],
