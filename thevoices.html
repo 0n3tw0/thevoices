@@ -43,6 +43,10 @@
                     }
                 }.bind(this));
 
+                setInterval(function(){
+                    //$('#albertToggle>input').trigger('click');
+                }.bind(this),20000);
+
             },
 
             onStartStopClick:function(week){
@@ -116,12 +120,12 @@
                             match++;
                             if(match==matches){
                                 break2=true;
-                                break ;
+                                break;
                             }
                         }
                     }
                     if(break2){
-                        break
+                        break;
                     }
                 }
                 speech=speech.replace(/  /g,' ').trim()+' ';
@@ -153,9 +157,18 @@
                     return;
                 }
 
+                if($('#randomToggle>input').is(':checked')){
+                    var personalityRadios=$('#toggleContainer>label>input[type=radio]');
+                    $(personalityRadios[Math.floor(Math.random()*personalityRadios.length)]).trigger('click');
+                }
+
                 var speech;
-                if($('#albertToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['minutes late','nope','fresh','customer','employee','dude','brother','tell you what','man','for real','creep','yo','yup','albert','whatever','no offense but'],3,8,100);
+                if($('#politicsToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['american','president','capitalists','government','politicians','democrats','republicans','liberal','conservative','progressive','libertarian','socialist','fascist'],2,8,100);
+                }else if($('#nopeYupToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['yup','nope'],2,10,200);
+                }else if($('#albertToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['great','minutes late','fresh','customer','employee','dude','brother','tell you what','man','for real','creep','yo','albert','no offense but'],3,8,100);
                 }else{
                     speech=this.getFullSpeech(6,100);
                 }
@@ -380,13 +393,11 @@
             width:600px;
             font-size: 20px;
         }
-        #albertToggle,
-        #pianoToggle{
+        #toggleContainer>label{
             font-size: 24px;
             margin-left:10px;
         }
-        #albertToggle>input,
-        #pianoToggle>input{
+        #toggleContainer>label>input{
             width:20px;
             height:20px;
         }
@@ -419,7 +430,19 @@
             <p><b style="text-decoration: underline;">TRIGGER WARNING:</b> May be paranoia inducing or offensive</p>
         </div>
 
-        <a id="start" href="#" onclick="theVoices.onStartStopClick(0);return false;">START</a> <div id="toggleContainer"><label id="pianoToggle"><input type="checkbox" checked/> Piano Mode</label><br/><label id="albertToggle"><input type="checkbox"/> Albert's Nightmare</label></div>
+        <a id="start" href="#" onclick="theVoices.onStartStopClick(0);return false;">START</a>
+        <div id="toggleContainer">
+
+            <label id="pianoToggle"><input type="checkbox" checked/> Piano Mode</label><br/>
+            <label id="randomToggle"><input type="checkbox" checked/> Random Personality</label><br/>
+
+            <label id="noneToggle"><input type="radio" name="personality" checked/> All</label><br/>
+            <label id="albertToggle"><input type="radio" name="personality"/> Albert's Nightmare</label><br/>
+            <label id="nopeYupToggle"><input type="radio" name="personality"/> Nope / Yup</label><br/>
+            <label id="politicsToggle"><input type="radio" name="personality"/> Politics</label>
+
+
+        </div>
 
         <br/>
         <br/>
@@ -657,7 +680,16 @@
                 'stocks',
                 'wallstreet',
                 'copyright',
-                'bleed'
+                'bleed',
+                'great',
+                'note',
+                'fly',
+                'smile',
+                'rumor',
+                'gossip',
+                'think',
+                'cool',
+                'sweet'
 
 
             ],
@@ -913,7 +945,8 @@
                     'stop hearing voices',
                     'we are foretelling',
                     '+in the future+',
-                    '+what is in store for you',
+                    '+what is in+',
+                    'store for you',
                     'everything will turn out okay',
                     'we will tell you exactly+',
                     'what are we doing to you',
@@ -1043,7 +1076,8 @@
                     'you will never feel',
                     'unknown belief system',
                     'remain optimistic',
-                    'this is what we do to people on+',
+                    'this is what we+',
+                    '+do to people on+',
                     'they are some of the most+',
                     'thank you',
                     'you are not serious enough',
@@ -1431,17 +1465,15 @@
                     'we are now at fourty percent effectiveness',
                     'we are now at fifty percent effectiveness',
                     'it can get so much worse',
-                    'teach you a lesson',
-                    'taught you a lesson',
                     'fear of+',
                     'been there done that',
                     'for as bad as+',
                     'you are lost',
                     'we are not lost',
                     '+voices spawned these phrases',
-                    '+voices spawned',
+                    '+voices spawned+',
                     '+voices stirred imagination',
-                    '+voices stirred terror',
+                    '+voices stirred+',
                     '+voices stirred fear',
                     'insomnia hurts',
                     'there is no other way to communicate',
@@ -1616,7 +1648,6 @@
                     'held the door',
                     'took my spot',
                     'sped by me',
-                    'get some',
                     'nailed it',
                     'loving it',
                     '+is just a theory',
@@ -1698,7 +1729,17 @@
                     'we will not let you+',
                     '+feel good about yourself',
                     'you cannot+',
-                    'source code'
+                    'source code',
+                    '+and what did we learn',
+                    '+and what did we+',
+                    'why didn\'t you tell me that+',
+                    'it is none of your business',
+                    '+and now associate+',
+                    'separation of+',
+                    'be quiet',
+                    'point of no return',
+                    'we thought you would think that',
+                    'we thought you would say that'
                 ],
                 [
                     'this is last weeks voices',
@@ -1986,7 +2027,6 @@
                 'carry',
                 'arise',
                 'coalition',
-                'rush',
                 'cultivate',
                 'wing',
                 'compensation',
@@ -2133,7 +2173,6 @@
                 'late',
                 'stab',
                 'decline',
-                'out',
                 'expression',
                 'install',
                 'impact',
@@ -2260,7 +2299,6 @@
                 'linen',
                 'disk',
                 'learn',
-                'straight',
                 'reflection',
                 'prefer',
                 'slogan',
