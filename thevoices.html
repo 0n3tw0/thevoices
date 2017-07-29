@@ -43,9 +43,7 @@
                     }
                 }.bind(this));
 
-                setInterval(function(){
-                    //$('#albertToggle>input').trigger('click');
-                }.bind(this),20000);
+
 
             },
 
@@ -163,12 +161,16 @@
                 }
 
                 var speech;
-                if($('#politicsToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['american','president','capitalists','government','politicians','democrats','republicans','liberal','conservative','progressive','libertarian','socialist','fascist'],2,8,100);
+                if($('#psychologyToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['healthcare','hospital','sick','prescription','mad','talking','tantrum','narcissist','psychopath','schizophrenic','depression','patient'],2,6,60);
+                }else if($('#politicsToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['congress','senate','patriot','patriotism','american','president','capitalists','government','politicians','democrats','republicans','liberal','conservative','progressive','libertarian','socialist','fascist'],2,8,100);
                 }else if($('#nopeYupToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['yup','nope'],2,10,200);
                 }else if($('#albertToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['great','minutes late','fresh','customer','employee','dude','brother','tell you what','man','for real','creep','yo','albert','no offense but'],3,8,100);
+                }else if($('#celebrityToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['scene','musician','narcissist','star','wasted','following','profit','column','what','love','great','gossip','rumor','hint','clue','nailed','millionaire','go along','taxes','social','famous','fame','money','actor','actress','celebrity'],4,8,100);
                 }else{
                     speech=this.getFullSpeech(6,100);
                 }
@@ -439,7 +441,10 @@
             <label id="noneToggle"><input type="radio" name="personality" checked/> All</label><br/>
             <label id="albertToggle"><input type="radio" name="personality"/> Albert's Nightmare</label><br/>
             <label id="nopeYupToggle"><input type="radio" name="personality"/> Nope / Yup</label><br/>
-            <label id="politicsToggle"><input type="radio" name="personality"/> Politics</label>
+            <label id="politicsToggle"><input type="radio" name="personality"/> Politics</label><br/>
+            <label id="celebrityToggle"><input type="radio" name="personality"/> Celebrity</label><br/>
+            <label id="psychologyToggle"><input type="radio" name="personality"/> Psychology</label>
+
 
 
         </div>
@@ -483,7 +488,6 @@
                 'liar',
                 'corporation',
                 'company',
-                'militia',
                 'mafia',
                 'authority',
                 'government',
@@ -513,8 +517,12 @@
                 'official',
                 'slime',
                 'creep',
-                'cousin'
-
+                'cousin',
+                'actor',
+                'actress',
+                'pest',
+                'tenant',
+                'client'
             ],
 
             repeatedAnnoyingWords:[
@@ -689,7 +697,22 @@
                 'gossip',
                 'think',
                 'cool',
-                'sweet'
+                'sweet',
+                'famous',
+                'fame',
+                'famous',
+                'column',
+                'love',
+                'hate',
+                'pest',
+                'patient',
+                'enemy',
+                'enemies',
+                'prescription',
+                'boom',
+                'scene',
+                'congress',
+                'senate'
 
 
             ],
@@ -877,6 +900,7 @@
                     'I think they think+',
                     'designer conversation',
                     'we won\'t let you work',
+                    'we won\'t let you sleep',
                     'we can do whatever we+',
                     '+want to+',
                     '+you upset them',
@@ -1187,7 +1211,6 @@
                     'there is nothing you can do',
                     'justice for some',
                     'liberty or voices',
-                    '+begets+',
                     'forced debate',
                     'taken seriously',
                     'what is the truth',
@@ -1280,7 +1303,6 @@
                     'this is a conspiracy',
                     'this is not a conspiracy',
                     'conspiracy theory',
-                    'realm of possibility',
                     'realm of+',
                     '+in my head',
                     '+get through to them',
@@ -1551,6 +1573,7 @@
                     'a billion dollars',
                     'ominous amount of+',
                     'money hoarded',
+                    'love money',
                     'because you think+',
                     'secrets in media',
                     'hints in the media',
@@ -1739,7 +1762,8 @@
                     'be quiet',
                     'point of no return',
                     'we thought you would think that',
-                    'we thought you would say that'
+                    'we thought you would say that',
+                    'see I told you that if+'
                 ],
                 [
                     'this is last weeks voices',
@@ -2196,7 +2220,6 @@
                 'adult',
                 'fail',
                 'cooperative',
-                'drag',
                 'package',
                 'cheap',
                 'normal',
@@ -2403,7 +2426,6 @@
                 'uniform',
                 'piano',
                 'dress',
-                'cut',
                 'reproduction',
                 'attachment',
                 'science',
