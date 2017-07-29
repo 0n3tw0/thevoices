@@ -160,17 +160,23 @@
                     $(personalityRadios[Math.floor(Math.random()*personalityRadios.length)]).trigger('click');
                 }
 
+                //TODO: specific one words
+
                 var speech;
                 if($('#psychologyToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['healthcare','hospital','sick','prescription','mad','talking','tantrum','narcissist','psychopath','schizophrenic','depression','patient'],2,6,60);
+                    speech=this.getFilteredSpeech(['predicted','understood','healthcare','hospital','sick','prescription','mad','talking','tantrum','narcissist','psychopath','schizophrenic','depression','patient'],2,6,60);
                 }else if($('#politicsToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['congress','senate','patriot','patriotism','american','president','capitalists','government','politicians','democrats','republicans','liberal','conservative','progressive','libertarian','socialist','fascist'],2,8,100);
                 }else if($('#nopeYupToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['yup','nope'],2,10,200);
+                    speech=this.getFilteredSpeech(['yup','nope'],2,8,80);
                 }else if($('#albertToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['great','minutes late','fresh','customer','employee','dude','brother','tell you what','man','for real','creep','yo','albert','no offense but'],3,8,100);
                 }else if($('#celebrityToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['scene','musician','narcissist','star','wasted','following','profit','column','what','love','great','gossip','rumor','hint','clue','nailed','millionaire','go along','taxes','social','famous','fame','money','actor','actress','celebrity'],4,8,100);
+                }else if($('#driverToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['ticket','penalty','who cares','just say no','dmv','license','driving','reckless','auditory','honk','revved','road','headache','bumper sticker','texting','eye contact','shout','authority','sleep','driver','cut me off','took my spot','sped by me','blind spot','voices','fender bender','crash'],3,8,80);
+                }else if($('#canadianToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['sorry'],1,4,60);
                 }else{
                     speech=this.getFullSpeech(6,100);
                 }
@@ -399,6 +405,9 @@
             font-size: 24px;
             margin-left:10px;
         }
+        #toggleContainer>label>input[type=radio]{
+            margin-left:20px;
+        }
         #toggleContainer>label>input{
             width:20px;
             height:20px;
@@ -443,7 +452,9 @@
             <label id="nopeYupToggle"><input type="radio" name="personality"/> Nope / Yup</label><br/>
             <label id="politicsToggle"><input type="radio" name="personality"/> Politics</label><br/>
             <label id="celebrityToggle"><input type="radio" name="personality"/> Celebrity</label><br/>
-            <label id="psychologyToggle"><input type="radio" name="personality"/> Psychology</label>
+            <label id="psychologyToggle"><input type="radio" name="personality"/> Psychology</label><br/>
+            <label id="driverToggle"><input type="radio" name="personality"/> Driving</label><br/>
+            <label id="canadianToggle"><input type="radio" name="personality"/> Canadian</label>
 
 
 
@@ -522,7 +533,8 @@
                 'actress',
                 'pest',
                 'tenant',
-                'client'
+                'client',
+                'driver'
             ],
 
             repeatedAnnoyingWords:[
@@ -627,7 +639,6 @@
                 'exist',
                 'new',
                 'why',
-                'covert',
                 'penalty',
                 'psychotic',
                 'trivial',
@@ -675,6 +686,8 @@
                 'powerful',
                 'yup',
                 'nope',
+                'yup',
+                'nope',
                 'yo',
                 'fresh',
                 'true',
@@ -712,7 +725,24 @@
                 'boom',
                 'scene',
                 'congress',
-                'senate'
+                'senate',
+                '+and+',
+                '+but+',
+                '+or+',
+                'cheese',
+                'crash',
+                'shout',
+                'texting',
+                'road',
+                'revved',
+                'honk',
+                'reckless',
+                'license',
+                'dmv',
+                'turkey',
+                'driving',
+                'radical',
+                'ticket'
 
 
             ],
@@ -1324,7 +1354,6 @@
                     'we want you to+',
                     'we cannot radicalize',
                     'we do not radicalize',
-                    'born evil',
                     'born good',
                     'there is no reason to+',
                     'we do not understand',
@@ -1614,7 +1643,6 @@
                     'you were the cause of+',
                     'if it hadn\'t have been for you+',
                     'then I would have+',
-                    'radical authority',
                     'they always try to+',
                     'they already knew+',
                     'constantly changing antagonizing speech',
@@ -1764,7 +1792,18 @@
                     'we thought you would think that',
                     'we thought you would say that',
                     'see I told you that if+',
-                    'looking for trouble'
+                    'looking for trouble',
+                    'blind spot',
+                    'fender bender',
+                    'fell asleep',
+                    'bumper sticker',
+                    'the driver+',
+                    'driving to+',
+                    'driving slow',
+                    'slow driver'
+
+
+
                 ],
                 [
                     'this is last weeks voices',
@@ -3151,7 +3190,6 @@
                 'complex',
                 'superior',
                 'factory',
-                'soar',
                 'waste',
                 'breakdown',
                 'deport',
@@ -3297,7 +3335,8 @@
                 'progressive',
                 'wound',
                 'height',
-                'frog'
+                'frog',
+                'sleep'
             ]
 
         }
