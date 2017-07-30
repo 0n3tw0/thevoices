@@ -35,6 +35,7 @@
                         $('body').removeClass('fullscreen');
                     }
                 });
+                $('window').trigger('resize');
 
                 $(window).keypress(function (e) {
                     if (e.keyCode === 0 || e.keyCode === 32) {
@@ -42,12 +43,13 @@
                         this.onStartStopClick(0);
                     }
                 }.bind(this));
-
-
+                $(window).trigger('resize');
 
             },
 
+
             onStartStopClick:function(week){
+
                 if($('#start').text()=='OKAY FINE'){
                     return;
                 }
@@ -160,17 +162,21 @@
                     $(personalityRadios[Math.floor(Math.random()*personalityRadios.length)]).trigger('click');
                 }
 
+                $('#personalityRight').text($('#toggleContainer>label>input[type=radio]:checked').parent().text().trim()).addClass('show');
+
+
+
                 //TODO: specific one words
 
                 var speech;
                 if($('#schizophrenicToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['to be understood','predicted','understood','healthcare','healthcare','hospital','sick','prescription','mad','talking','tantrum','narcissist','psychopath','schizophrenia','schizophrenia','schizophrenic','schizophrenic','depression','patient','paranoia','paranoid'],4,8,80);
                 }else if($('#politicsToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['bootstraps','let me speak','heard','because','healthcare','healthcare','environment','environment','said','said','unamerican','congress','senate','patriot','patriotism','american','president','capitalists','government','politicians','democrats','republicans','democrats','republicans','liberal','conservative','progressive','libertarian','socialist','fascist'],4,8,80);
+                    speech=this.getFilteredSpeech(['credibility','bootstraps','let me speak','heard','because','healthcare','healthcare','environment','environment','said','said','unamerican','congress','senate','patriot','patriotism','american','president','capitalists','government','politicians','democrats','republicans','democrats','republicans','liberal','conservative','progressive','libertarian','socialist','fascist'],4,8,80);
                 }else if($('#nopeYupToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['yup','nope','whelp'],2,8,80);
                 }else if($('#albertToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['great','minutes late','fresh','customer','employee','dude','brother','tell you what','man','for real','for real','creep','yo','albert','albert','no offense but'],3,8,100);
+                    speech=this.getFilteredSpeech(['you got this','great','minutes late','fresh','customer','employee','dude','brother','tell you what','man','for real','for real','creep','yo','albert','albert','no offense but'],3,8,100);
                 }else if($('#celebrityToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['gossip','motivation','musician','patience payday','box office','billion','scene','musician','narcissist','star','wasted','following','profit','column','what','love','loves','great','gossip','rumor','hint','clue','nailed','millionaire','millions','millionaire','millions','go along','taxes','social','famous','fame','famous','fame','money','actor','actress','celebrity','celebrity'],4,8,80);
                 }else if($('#driverToggle>input').is(':checked')){
@@ -178,9 +184,9 @@
                 }else if($('#canadianToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['sorry'],1,4,60);
                 }else if($('#roboToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['radical','echo effect activated','effect activated','harmful','elite','id','correction','clarify','inserted','cancel','texting','risky','hint','clue','said','talked','authority','electrodes','execution','keep enemies close','social','useless intelligence','nonsense','order by','test','statistics','inserted','database','detected','identified','insert','update','code','select','crash','halt','name'],5,8,100);
+                    speech=this.getFilteredSpeech(['copyright','email','creep','effectiveness','radical','echo effect activated','effect activated','harmful','elite','id','correction','clarify','inserted','cancel','texting','risky','hint','clue','said','talked','authority','electrodes','execution','keep enemies close','social','useless intelligence','nonsense','order by','test','statistics','inserted','database','detected','identified','insert','update','code','select','crash','halt','name'],5,8,100);
                 }else if($('#loveToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['friendly','friendship','hospitality','remain optimistic','most interesting','most unique','love you','love','peace','in the world'],2,8,80);
+                    speech=this.getFilteredSpeech(['great person','help','friendly','friendship','hospitality','remain optimistic','most interesting','most unique','love you','love','peace','in the world'],2,8,80);
                 }else{
                     speech=this.getFullSpeech(6,100);
                 }
@@ -239,6 +245,9 @@
                 }else{
                     highlightWordJq.next().addClass('highlighted show');
                     highlightWordJq.removeClass('highlighted');
+                    if(!highlightWordJq.next().next().length){
+                        $('#personalityRight').removeClass('show');
+                    }
                     if(!highlightWordJq.next().next().next().length&&$('#pianoToggle>input').is(':checked')){
 
                         setTimeout(function(){
@@ -341,9 +350,29 @@
             padding:30px;
             border-radius:20px;
         }
-        #history>p:not(:first-child){
+        #history>p:nth-child(2){
+            opacity:.45;
+        }
+        #history>p:nth-child(3){
+            opacity:.35;
+        }
+        #history>p:nth-child(4){
             opacity:.25;
         }
+        #history>p:nth-child(5){
+            opacity:.15;
+        }
+        #history>p:nth-child(6),
+        #history>p:nth-child(7),
+        #history>p:nth-child(8),
+        #history>p:nth-child(9),
+        #history>p:nth-child(10){
+            opacity:.05;
+        }
+
+
+
+
 
         #history>p{
             background-color: rgba(0,0,0,.5);
@@ -424,14 +453,32 @@
             position:relative;
             text-align:left;
         }
+        #personalityRight{
+            position:fixed;
+            right:40px;
+            bottom:-120px;
+            padding:20px;
+            border:2px solid white;
+            font-size: 64px;
+            background-color:black;
+            z-index:1;
+            transition:bottom linear .1s;
+        }
+        #personalityRight.show{
 
+            bottom:40px;
+        }
     </style>
 
 </head>
 
 <body>
 
+    <div id="personalityRight">Albert's Nightmare</div>
+
     <div id="header">
+
+
 
 
         <h1>The Voices</h1>
@@ -450,6 +497,8 @@
 
             <label id="pianoToggle"><input type="checkbox" checked/> Piano Mode</label><br/>
             <label id="randomToggle"><input type="checkbox" checked/> Random Personality</label><br/>
+
+            <!-- combobox dropdown -->
 
             <label id="noneToggle"><input type="radio" name="personality" checked/> All</label><br/>
             <label id="albertToggle"><input type="radio" name="personality"/> Albert's Nightmare</label><br/>
@@ -541,7 +590,8 @@
                 'tenant',
                 'client',
                 'driver',
-                'unamerican'
+                'unamerican',
+                'fool'
 
             ],
 
@@ -658,6 +708,7 @@
                 'code',
                 'person',
                 'chicken',
+                'duck',
                 'cow',
                 'fish',
                 'email',
@@ -792,7 +843,13 @@
                 'raw',
                 'deal',
                 'motivated',
-                'environment'
+                'environment',
+                'anonymous',
+                'credibility',
+                'basic',
+                'superficial',
+                'asylum',
+                'help'
 
 
 
@@ -1814,6 +1871,7 @@
                     'because you believe that+',
                     'because you thought that she+',
                     'because you thought that he+',
+                    'because you thought+',
                     'this is abstract thought',
                     'induced abstract thought',
                     'out of order thinking',
@@ -1879,7 +1937,18 @@
                     'a hundred and fifty thousand people die every single day',
                     '+and now they\'re talking about religion',
                     '+and now they\'re talking about politicians',
-                    'voices influence vote'
+                    'voices influence voter',
+                    '+hated him',
+                    '+hated her',
+                    'peer pressure',
+                    'hated them',
+                    'not good enough',
+                    'not attractive enough',
+                    'not smart enough',
+                    'still they lie to you',
+                    'to be accepted',
+                    'we are trying to help you',
+                    'you got this'
 
 
                 ],
