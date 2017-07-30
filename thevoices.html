@@ -166,7 +166,7 @@
                 if($('#psychologyToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['predicted','understood','healthcare','hospital','sick','prescription','mad','talking','tantrum','narcissist','psychopath','schizophrenic','depression','patient'],2,6,60);
                 }else if($('#politicsToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['congress','senate','patriot','patriotism','american','president','capitalists','government','politicians','democrats','republicans','liberal','conservative','progressive','libertarian','socialist','fascist'],2,8,100);
+                    speech=this.getFilteredSpeech(['unamerican','congress','senate','patriot','patriotism','american','president','capitalists','government','politicians','democrats','republicans','liberal','conservative','progressive','libertarian','socialist','fascist'],2,8,100);
                 }else if($('#nopeYupToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['yup','nope','whelp'],2,8,80);
                 }else if($('#albertToggle>input').is(':checked')){
@@ -174,9 +174,13 @@
                 }else if($('#celebrityToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['box office','billion','scene','musician','narcissist','star','wasted','following','profit','column','what','love','great','gossip','rumor','hint','clue','nailed','millionaire','millions','go along','taxes','social','famous','fame','money','actor','actress','celebrity'],4,8,100);
                 }else if($('#driverToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['ticket','penalty','who cares','just say no','dmv','license','driving','reckless','auditory','honk','revved','road','headache','bumper sticker','texting','eye contact','shout','authority','sleep','driver','cut me off','took my spot','sped by me','blind spot','voices','fender bender','crash'],3,8,80);
+                    speech=this.getFilteredSpeech(['minutes','late','jaywalking','ticket','penalty','who cares','just say no','dmv','license','driving','reckless','auditory','honk','revved','road','headache','bumper sticker','texting','eye contact','shout','authority','sleep','driver','cut me off','took my spot','sped by me','blind spot','voices','fender bender','crash'],3,8,80);
                 }else if($('#canadianToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['sorry'],1,4,60);
+                }else if($('#roboToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['echo effect activated','effect activated','harmful','elite','id','correction','clarify','inserted','cancel','texting','risky','hint','clue','said','talked','authority','electrodes','execution','keep enemies close','social','useless intelligence','nonsense','order by','test','statistics','inserted','database','detected','identified','insert','update','code','select','crash','halt','name'],5,8,100);
+                }else if($('#loveToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['friendly','friendship','hospitality','remain optimistic','most interesting','most unique','love you','love','peace','in the world'],2,8,80);
                 }else{
                     speech=this.getFullSpeech(6,100);
                 }
@@ -454,7 +458,9 @@
             <label id="celebrityToggle"><input type="radio" name="personality"/> Celebrity</label><br/>
             <label id="psychologyToggle"><input type="radio" name="personality"/> Psychology</label><br/>
             <label id="driverToggle"><input type="radio" name="personality"/> Driving</label><br/>
-            <label id="canadianToggle"><input type="radio" name="personality"/> Canadian</label>
+            <label id="canadianToggle"><input type="radio" name="personality"/> Canadian</label><br/>
+            <label id="roboToggle"><input type="radio" name="personality"/> Robo Authority</label><br/>
+            <label id="loveToggle"><input type="radio" name="personality"/> Love</label>
 
 
 
@@ -534,7 +540,9 @@
                 'pest',
                 'tenant',
                 'client',
-                'driver'
+                'driver',
+                'unamerican'
+
             ],
 
             repeatedAnnoyingWords:[
@@ -747,7 +755,42 @@
                 'cap',
                 'whelp',
                 'whelp',
-                'reputation'
+                'reputation',
+                'error',
+                'detected',
+                'insert',
+                'update',
+                'join',
+                'select',
+                'compile',
+                'test',
+                'statistics',
+                'create',
+                'set',
+                'order by',
+                'illogical',
+                'logical',
+                'computer',
+                'unit',
+                'sensors',
+                'technology',
+                'halt',
+                'different',
+                'nonsense',
+                'intelligence',
+                'execution',
+                'electrodes',
+                'talked',
+                'cancel',
+                'clarify',
+                'correction',
+                'id',
+                'elite',
+                'trees',
+                'peace',
+                'friend',
+                'raw',
+                'deal'
 
 
 
@@ -1183,6 +1226,7 @@
                     'secret recruitment',
                     'deny what voices are',
                     'we love you',
+                    'love you',
                     'you are too honest',
                     'truth denies voices',
                     'honesty denies voices',
@@ -1242,6 +1286,8 @@
                     'error prone',
                     'always perfect',
                     'electrodes detected response',
+                    'electrodes detected response',
+                    'electrodes detected+',
                     'phrase inserted into database',
                     'it\'s not like+',
                     'there is nothing you can do',
@@ -1815,8 +1861,20 @@
                     'our profession',
                     'egg on their face',
                     '+and yet you want to+',
-                    '+driving beside me'
-
+                    '+driving beside me',
+                    'sensors detected response',
+                    'detected objector',
+                    'inserted into database',
+                    'sentence inserted into database',
+                    '+as designed',
+                    'harmful speech detected',
+                    'thought block',
+                    'shut up',
+                    'not uncommon',
+                    'not that uncommon',
+                    'they keep yelling at me in my head',
+                    'echo effect activated',
+                    'a hundred and fifty thousand people die every single day'
 
 
                 ],
@@ -1923,7 +1981,6 @@
                 'switch',
                 'ambiguous',
                 'adopt',
-                'tray',
                 'row',
                 'weigh',
                 'empirical',
@@ -2676,7 +2733,6 @@
                 'regular',
                 'kettle',
                 'method',
-                'garbage',
                 'chop',
                 'sanctuary',
                 'endure',
@@ -3351,7 +3407,11 @@
                 'wound',
                 'height',
                 'frog',
-                'sleep'
+                'sleep',
+                'basketball',
+                'football',
+                'hockey',
+                'soccer'
             ]
 
         }
