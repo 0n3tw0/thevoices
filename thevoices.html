@@ -166,7 +166,7 @@
 
 
 
-                //TODO: specific one words
+                //TODO: specific one words, but personality
 
                 var speech;
                 if($('#schizophrenicToggle>input').is(':checked')){
@@ -188,7 +188,7 @@
                 }else if($('#loveToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['great person','help','friendly','friendship','hospitality','remain optimistic','most interesting','most unique','love you','love','peace','in the world'],2,8,80);
                 }else if($('#whyToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['why','just','if'],3,6,80);
+                    speech=this.getFilteredSpeech(['why','just','if'],3,6,100);
                 }else{
                     speech=this.getFullSpeech(6,100);
                 }
@@ -860,7 +860,14 @@
                 'denial',
                 'snitch',
                 'informant',
-                'huh'
+                'huh',
+                'budget',
+                'card',
+                'disturbance',
+                'courted',
+                'court',
+                'carry',
+                'encryption'
 
 
 
@@ -868,6 +875,11 @@
 
             weeksVoices:[
                 [
+                    'courted by+',
+                    'I never cared+',
+                    'why did they+',
+                    '+and still you can\'t+',
+                    '+and then you have to+',
                     'temporary tingles',
                     '+for real',
                     'everybody knows that if you+',
@@ -2014,7 +2026,14 @@
                     'past wars',
                     'past conflicts',
                     'past struggles',
-                    'if you had+'
+                    'if you had+',
+                    'another chapter in+',
+                    'human evolution',
+                    'single defining moment',
+                    'life moment',
+                    '+oh because+',
+                    'random number generator'
+
 
 
 
@@ -2599,7 +2618,6 @@
                 'extent',
                 'boat',
                 'sight',
-                'head',
                 'sweater',
                 'chip',
                 'output',
