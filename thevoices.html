@@ -170,15 +170,15 @@
 
                 var speech;
                 if($('#schizophrenicToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['to be understood','predicted','understood','healthcare','healthcare','hospital','sick','prescription','mad','talking','tantrum','narcissist','psychopath','schizophrenia','schizophrenia','schizophrenic','schizophrenic','depression','patient','paranoia','paranoid'],4,8,80);
+                    speech=this.getFilteredSpeech(['every single day','to be understood','predicted','understood','healthcare','healthcare','hospital','sick','prescription','mad','talking','tantrum','narcissist','psychopath','schizophrenia','schizophrenia','schizophrenic','schizophrenic','depression','patient','paranoia','paranoid'],4,8,80);
                 }else if($('#politicsToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['credibility','bootstraps','let me speak','heard','because','healthcare','healthcare','environment','environment','said','said','unamerican','congress','senate','patriot','patriotism','american','president','capitalists','government','politicians','democrats','republicans','democrats','republicans','liberal','conservative','progressive','libertarian','socialist','fascist'],4,8,80);
+                    speech=this.getFilteredSpeech(['president','healthcare','healthcare','environment','environment','said','said','democrat','republican','democrat','republican','democrats','republicans','democrats','republicans','egg on their face','just','why'],4,8,80);
                 }else if($('#nopeYupToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['yup','nope','whelp'],2,8,80);
                 }else if($('#albertToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['you got this','great','minutes late','fresh','customer','employee','dude','brother','tell you what','man','for real','for real','creep','yo','albert','albert','no offense but'],3,8,100);
                 }else if($('#celebrityToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['gossip','motivation','musician','patience payday','box office','billion','scene','musician','narcissist','star','wasted','following','profit','column','what','love','loves','great','gossip','rumor','hint','clue','nailed','millionaire','millions','millionaire','millions','go along','taxes','social','famous','fame','famous','fame','money','actor','actress','celebrity','celebrity'],4,8,80);
+                    speech=this.getFilteredSpeech(['brought to you by','gossip','motivation','musician','patience payday','box office','billion','scene','musician','narcissist','star','wasted','following','profit','column','what','love','loves','great','gossip','rumor','hint','clue','nailed','millionaire','millions','millionaire','millions','go along','taxes','social','famous','fame','famous','fame','money','actor','actress','celebrity','celebrity'],4,8,80);
                 }else if($('#driverToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['driver','driving','minutes','late','jaywalking','ticket','penalty','who cares','just say no','dmv','license','driving','reckless','auditory','honk','revved','road','headache','bumper sticker','texting','eye contact','shout','authority','sleep','driver','cut me off','took my spot','sped by me','blind spot','voices','fender bender','crash'],3,8,80);
                 }else if($('#canadianToggle>input').is(':checked')){
@@ -187,6 +187,8 @@
                     speech=this.getFilteredSpeech(['copyright','email','creep','effectiveness','radical','echo effect activated','effect activated','harmful','elite','id','correction','clarify','inserted','cancel','texting','risky','hint','clue','said','talked','authority','electrodes','execution','keep enemies close','social','useless intelligence','nonsense','order by','test','statistics','inserted','database','detected','identified','insert','update','code','select','crash','halt','name'],5,8,100);
                 }else if($('#loveToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['great person','help','friendly','friendship','hospitality','remain optimistic','most interesting','most unique','love you','love','peace','in the world'],2,8,80);
+                }else if($('#whyToggle>input').is(':checked')){
+                    speech=this.getFilteredSpeech(['why','just'],2,6,80);
                 }else{
                     speech=this.getFullSpeech(6,100);
                 }
@@ -505,11 +507,12 @@
             <label id="nopeYupToggle"><input type="radio" name="personality"/> Nope / Yup</label><br/>
             <label id="politicsToggle"><input type="radio" name="personality"/> Politics</label><br/>
             <label id="celebrityToggle"><input type="radio" name="personality"/> Celebrity</label><br/>
-            <label id="schizophrenicToggle"><input type="radio" name="personality"/> Schizophrenic</label><br/>
+            <label id="schizophrenicToggle"><input type="radio" name="personality"/> Schizophrenia</label><br/>
             <label id="driverToggle"><input type="radio" name="personality"/> Driving</label><br/>
             <label id="canadianToggle"><input type="radio" name="personality"/> Canadian</label><br/>
             <label id="roboToggle"><input type="radio" name="personality"/> Robo Authority</label><br/>
-            <label id="loveToggle"><input type="radio" name="personality"/> Love</label>
+            <label id="loveToggle"><input type="radio" name="personality"/> Love</label><br/>
+            <label id="whyToggle"><input type="radio" name="personality"/> Why / Just</label>
 
 
 
@@ -563,6 +566,8 @@
                 'capitalists',
                 'democrats',
                 'republicans',
+                'democrat',
+                'republican',
                 'traitor',
                 'employee',
                 'progressive',
@@ -849,7 +854,13 @@
                 'basic',
                 'superficial',
                 'asylum',
-                'help'
+                'help',
+                'see',
+                'chip',
+                'denial',
+                'snitch',
+                'informant',
+                'huh'
 
 
 
@@ -1905,6 +1916,7 @@
                     'we thought you would say that',
                     'see I told you that if+',
                     'looking for trouble',
+                    'we are not looking for trouble',
                     'blind spot',
                     'fender bender',
                     'fell asleep',
@@ -1948,7 +1960,57 @@
                     'still they lie to you',
                     'to be accepted',
                     'we are trying to help you',
-                    'you got this'
+                    'you got this',
+                    'self diagnosed',
+                    'blind trust',
+                    'would others endure',
+                    '+and then they+',
+                    'you even+',
+                    'you even tried to+',
+                    'you were always like this',
+                    'presently retroactive',
+                    'future retroactively',
+                    'because he thought that+',
+                    'because she thought that+',
+                    'too much TV',
+                    'too much internet',
+                    'too much video games',
+                    'not working hard enough',
+                    'unknowingly recreating past ideologies',
+                    'human nature',
+                    'you have been+',
+                    'we are not in denial',
+                    'this is the+',
+                    '+product of their denial',
+                    '+culmination of their denial',
+                    'they cannot+',
+                    'identify their paranoid thoughts',
+                    'they do not+',
+                    '+hear voices in their head',
+                    'not qualified',
+                    'not qualified to+',
+                    'secret clearance',
+                    'social drama',
+                    'they are going to make you+',
+                    'mentally ill',
+                    'never assume',
+                    'never assume that+',
+                    'always assume',
+                    'always assume that+',
+                    'always knew they hated me',
+                    'always knew they+',
+                    'always knew that+',
+                    'why would they+',
+                    'I don\'t understand why',
+                    'change the narrative',
+                    'voices induce',
+                    '+based on+',
+                    'designer excuses foretelling',
+                    'why did you+',
+                    'why do you think+',
+                    'food is medicine',
+                    'healthy food'
+
 
 
                 ],
@@ -1986,7 +2048,6 @@
                 'part',
                 'easy',
                 'broccoli',
-                'bow',
                 'horseshoe',
                 'yard',
                 'mainstream',
@@ -3294,7 +3355,6 @@
                 'pace',
                 'flower',
                 'strategic',
-                'therapist',
                 'tooth',
                 'auditor',
                 'plan',
