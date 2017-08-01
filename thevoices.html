@@ -180,13 +180,13 @@
                 }else if($('#celebrityToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['stereotype','biography','autobiography','hard work','fans','fans','brought to you by','gossip','motivation','musician','patience payday','box office','billion','scene','musician','narcissist','star','wasted','following','profit','column','what','love','loves','great','gossip','rumor','hint','clue','nailed','millionaire','millions','pest','producer','director','millions','go along','taxes','social','famous','fame','famous','fame','money','actor','actress','celebrity','celebrity'],4,8,80);
                 }else if($('#driverToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['driver','driving','minutes','late','jaywalking','ticket','penalty','who cares','just say no','dmv','license','driving','reckless','auditory','honk','revved','road','headache','bumper sticker','texting','eye contact','shout','authority','sleep','driver','cut me off','took my spot','sped by me','blind spot','voices','fender bender','crash'],3,8,80);
+                    speech=this.getFilteredSpeech(['tailgating','driver','driving','minutes','late','jaywalking','ticket','penalty','who cares','just say no','dmv','license','driving','reckless','auditory','honk','revved','road','headache','bumper sticker','texting','eye contact','shout','authority','sleep','driver','cut me off','took my spot','sped by me','blind spot','voices','fender bender','crash'],3,8,80);
                 }else if($('#canadianToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['sorry'],1,4,60);
                 }else if($('#roboToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['copyright','email','creep','effectiveness','radical','echo effect activated','effect activated','harmful','elite','id','correction','clarify','inserted','cancel','texting','risky','hint','clue','said','talked','authority','electrodes','execution','keep enemies close','social','useless intelligence','nonsense','order by','test','statistics','inserted','database','detected','identified','insert','update','code','select','crash','halt','name'],5,8,100);
                 }else if($('#loveToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['great person','help','friendly','friendship','hospitality','remain optimistic','most interesting','most unique','love you','love','peace','in the world'],2,8,80);
+                    speech=this.getFilteredSpeech(['great person','help','friendly','friendship','hospitality','remain optimistic','most interesting','most unique','love','love you','love','peace','in the world'],2,4,50);
                 }else if($('#whyToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['why','just','if'],3,6,100);
                 }else{
@@ -879,7 +879,23 @@
                 'greedy',
                 'roasted',
                 'reconcile',
-                'subversive'
+                'subversive',
+                'extend',
+                'composition',
+                'plead',
+                'burp',
+                'understand',
+                'understanding',
+                'thumping',
+                'acceptance',
+                'imposter',
+                'inferiority',
+                'complex',
+                'consciousness',
+                'artificial',
+                'morale',
+                'tailgating',
+                'algorithm'
 
 
 
@@ -887,6 +903,15 @@
 
             weeksVoices:[
                 [
+                    'I don\'t care',
+                    'tough decisions',
+                    'secretly communicating',
+                    'keep labelling',
+                    'social control',
+                    'we don\'t want him to be a+',
+                    'we don\'t want her to be a+',
+                    'non fiction',
+                    'not all+',
                     'courted by+',
                     'I never cared+',
                     'why did they+',
@@ -926,6 +951,7 @@
                     'every waking hour',
                     'every single day',
                     'we don\'t understand why+',
+                    'you don\'t understand+',
                     'just for saying+',
                     'just because+',
                     'we can\'t believe that+',
@@ -995,6 +1021,7 @@
                     'you need to get help',
                     'that is exactly what+',
                     'they would say+',
+                    'they would start+',
                     'they would think+',
                     'we think you+',
                     'brought to you by+',
@@ -1864,6 +1891,8 @@
                     'to understand',
                     'to understand that',
                     'they even tried to+',
+                    'they even planned to+',
+                    '+planned to+',
                     'tried to',
                     '+and yet when I+',
                     'I would+',
@@ -2074,7 +2103,50 @@
                     '+in order to+',
                     'giving you new phrases',
                     'own mythology',
-                    'this is not me'
+                    'this is not me',
+                    'facial expressions',
+                    'paranoid source code',
+                    'forming a plot',
+                    'goofing around',
+                    'society functioning efficiently',
+                    'lift your spirits',
+                    'something serene',
+                    'making a scene',
+                    'they understand',
+                    'we understand',
+                    'she understands',
+                    'he understands',
+                    'it\'s so strange',
+                    'it is not escalating',
+                    'just don\'t do it',
+                    'it\'s so obvious',
+                    'we don\'t know',
+                    'why they do this',
+                    'oh great',
+                    '+has the capability to+',
+                    'pay rent',
+                    'we don\'t care',
+                    '+of all the strategies',
+                    'rally around a+',
+                    'how did you+',
+                    'develop this technology',
+                    'my thoughts were+',
+                    'subtle change over time',
+                    'we are concerned',
+                    'be wise',
+                    '+on the face of planet earth',
+                    'invented our reality',
+                    'reality check',
+                    'oh well',
+                    'good times',
+                    'empathy reflected',
+                    'good for you',
+                    'what please',
+                    'watch them debate',
+                    'try out best',
+                    '+but your putting voices into+',
+                    'they even talk about my+',
+                    'this is the culmination of+'
                 ],
                 [
                     'this is last weeks voices',
@@ -2372,7 +2444,6 @@
                 'telephone',
                 'convenience',
                 'edge',
-                'axis',
                 'sip',
                 'agree',
                 'horoscope',
