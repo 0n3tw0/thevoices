@@ -165,14 +165,14 @@
                     return;
                 }
 
-                if(Math.random()<.5&&$('#randomToggle>input').is(':checked')){
+                if(Math.random()<.75&&$('#randomToggle>input').is(':checked')){
                     var personalityOptions=$('#personalityToggle>option');
                     $('#personalityToggle').val($(personalityOptions[Math.floor(Math.random()*personalityOptions.length)]).attr('value'));
                 }
 
                 $('#personalityRight').text($('#personalityToggle>option:selected').text()).addClass('show');
 
-                //TODO: specific one words, but personality
+                //TODO: personalities have different voices
 
                 var speech;
                 switch($('#personalityToggle').val()){
@@ -201,13 +201,13 @@
                         speech=this.getFilteredSpeech(['virus','hacking','algorithm','copyright','email','creep','effectiveness','radical','echo effect activated','effect activated','harmful','elite','id','correction','clarify','inserted','cancel','texting','risky','hint','clue','said','talked','authority','electrodes','execution','keep enemies close','social','useless intelligence','nonsense','order by','test','statistics','inserted','database','detected','identified','insert','update','code','select','crash','halt','name'],5,8,100);
                         break;
                     case'loveToggle':
-                        speech=this.getFilteredSpeech(['great person','help','friendly','friendship','hospitality','remain optimistic','most interesting','most unique','love','love you','love','peace','in the world'],2,4,50);
+                        speech=this.getFilteredSpeech(['love','peace'],2,4,50);
                         break;
                     case'whyToggle':
                         speech=this.getFilteredSpeech(['why','just','if'],3,6,100);
                         break;
                     case'understandToggle':
-                        speech=this.getFilteredSpeech(['understand'],1,6,60);
+                        speech=this.getFilteredSpeech(['understand','understanding'],1,6,60);
                         break;
                     case'allToggle':
                         speech=this.getFullSpeech(6,100);
@@ -880,7 +880,6 @@
                 'trees',
                 'peace',
                 'friend',
-                'raw',
                 'deal',
                 'motivated',
                 'environment',
@@ -1320,6 +1319,7 @@
                     '+and now we have to+',
                     '+and now they think+',
                     '+and now they think because+',
+                    '+and now they\'re yelling',
                     'everybody thinks about+',
                     'we are not speaking to you',
                     'stop listening to us',
@@ -1582,6 +1582,7 @@
                     '+and because+',
                     'why would you radicalize',
                     'why would you try to radicalize',
+                    'we are not radicalizing you',
                     'some of the smartest',
                     'this is not poetry',
                     '+in an oppressive society',
@@ -2070,6 +2071,7 @@
                     'a hundred and fifty thousand people die every single day',
                     '+and now they\'re talking about religion',
                     '+and now they\'re talking about politicians',
+                    '+and now they\'re talking about past relationships',
                     'voices influence voter',
                     '+hated him',
                     '+hated her',
@@ -2293,7 +2295,9 @@
                     'we all make mistakes',
                     'you can help',
                     'pay your rent',
-                    'I can\'t think'
+                    'I can\'t think',
+                    'kitchen sink',
+                    'never ending argument'
                 ],
                 [
                     'this is last weeks voices',
@@ -2555,7 +2559,6 @@
                 'forest',
                 'tube',
                 'locate',
-                'apple',
                 'shareholder',
                 'economic',
                 'beat',
@@ -3077,7 +3080,6 @@
                 'suspect',
                 'shake',
                 'reckless',
-                'troop',
                 'obscure',
                 'fun',
                 'confidence',
@@ -3281,7 +3283,6 @@
                 'main',
                 'substitute',
                 'money',
-                'fill',
                 'sector',
                 'kitchen',
                 'memory',
@@ -3359,7 +3360,6 @@
                 'garage',
                 'flat',
                 'cancel',
-                'chase',
                 'repetition',
                 'north',
                 'lead',
@@ -3473,7 +3473,6 @@
                 'funeral',
                 'hide',
                 'threshold',
-                'abbey',
                 'fastidious',
                 'argument',
                 'finished',
