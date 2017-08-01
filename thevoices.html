@@ -45,6 +45,12 @@
                 }.bind(this));
                 $(window).trigger('resize');
 
+                $('#personalityToggle').change(function(){
+                    if($('#randomToggle>input').is(':checked')){
+                        $('#randomToggle>input').trigger('click');
+                    }
+                });
+
             },
 
 
@@ -61,7 +67,9 @@
                         $('#start').text('NO!');
                         this.stopButtonTimeout=setTimeout(function(){
                             $('#start').text('STOP');
+                            $('body').addClass('started');
                         },1000);
+                        $('body').removeClass('started');
                         return;
                     }else if($('#start').text()=='NO!'){
                         clearTimeout(this.stopButtonTimeout);
@@ -158,40 +166,54 @@
                 }
 
                 if($('#randomToggle>input').is(':checked')){
-                    var personalityRadios=$('#toggleContainer>label>input[type=radio]');
-                    $(personalityRadios[Math.floor(Math.random()*personalityRadios.length)]).trigger('click');
+                    var personalityOptions=$('#personalityToggle>option');
+                    $('#personalityToggle').val($(personalityOptions[Math.floor(Math.random()*personalityOptions.length)]).attr('value'));
                 }
 
-                $('#personalityRight').text($('#toggleContainer>label>input[type=radio]:checked').parent().text().trim()).addClass('show');
-
-
+                $('#personalityRight').text($('#personalityToggle>option:selected').text()).addClass('show');
 
                 //TODO: specific one words, but personality
 
                 var speech;
-                if($('#schizophrenicToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['every single day','to be understood','predicted','understood','healthcare','healthcare','hospital','sick','prescription','mad','talking','tantrum','narcissist','psychopath','schizophrenia','schizophrenia','schizophrenic','schizophrenic','depression','patient','paranoia','paranoid'],4,8,80);
-                }else if($('#politicsToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['agent','president','healthcare','healthcare','environment','environment','said','said','democrat','republican','democrat','republican','democrats','republicans','democrats','republicans','egg on their face','just','why'],4,8,80);
-                }else if($('#nopeYupToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['yup','nope','whelp'],2,8,80);
-                }else if($('#albertToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['you got this','great','minutes late','fresh','customer','employee','dude','brother','tell you what','man','for real','for real','creep','yo','albert','albert','no offense but'],3,8,100);
-                }else if($('#celebrityToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['stereotype','biography','autobiography','hard work','fans','fans','brought to you by','gossip','motivation','musician','patience payday','box office','billion','scene','musician','narcissist','star','wasted','following','profit','column','what','love','loves','great','gossip','rumor','hint','clue','nailed','millionaire','millions','pest','producer','director','millions','go along','taxes','social','famous','fame','famous','fame','money','actor','actress','celebrity','celebrity'],4,8,80);
-                }else if($('#driverToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['tailgating','driver','driving','minutes','late','jaywalking','ticket','penalty','who cares','just say no','dmv','license','driving','reckless','auditory','honk','revved','road','headache','bumper sticker','texting','eye contact','shout','authority','sleep','driver','cut me off','took my spot','sped by me','blind spot','voices','fender bender','crash'],3,8,80);
-                }else if($('#canadianToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['sorry'],1,4,60);
-                }else if($('#roboToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['algorithm','copyright','email','creep','effectiveness','radical','echo effect activated','effect activated','harmful','elite','id','correction','clarify','inserted','cancel','texting','risky','hint','clue','said','talked','authority','electrodes','execution','keep enemies close','social','useless intelligence','nonsense','order by','test','statistics','inserted','database','detected','identified','insert','update','code','select','crash','halt','name'],5,8,100);
-                }else if($('#loveToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['great person','help','friendly','friendship','hospitality','remain optimistic','most interesting','most unique','love','love you','love','peace','in the world'],2,4,50);
-                }else if($('#whyToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['why','just','if'],3,6,100);
-                }else{
-                    speech=this.getFullSpeech(6,100);
+                switch($('#personalityToggle').val()){
+                    case'schizophrenicToggle':
+                        speech=this.getFilteredSpeech(['every single day','to be understood','predicted','understood','healthcare','healthcare','hospital','sick','prescription','mad','talking','tantrum','narcissist','psychopath','schizophrenia','schizophrenia','schizophrenic','schizophrenic','depression','patient','paranoia','paranoid'],4,8,80);
+                        break;
+                    case'politicsToggle':
+                        speech=this.getFilteredSpeech(['agent','president','healthcare','healthcare','environment','environment','said','said','democrat','republican','democrat','republican','democrats','republicans','democrats','republicans','egg on their face','just','why'],4,8,80);
+                        break;
+                    case'nopeYupToggle':
+                        speech=this.getFilteredSpeech(['yup','nope','whelp'],2,8,80);
+                        break;
+                    case'albertToggle':
+                        speech=this.getFilteredSpeech(['you got this','great','minutes late','fresh','customer','employee','dude','brother','tell you what','man','for real','for real','creep','yo','albert','albert','no offense but'],3,8,100);
+                        break;
+                    case'celebrityToggle':
+                        speech=this.getFilteredSpeech(['stereotype','biography','autobiography','hard work','fans','fans','brought to you by','gossip','motivation','musician','patience payday','box office','billion','scene','musician','narcissist','star','wasted','following','profit','column','what','love','loves','great','gossip','rumor','hint','clue','nailed','millionaire','millions','pest','producer','director','millions','go along','taxes','social','famous','fame','famous','fame','money','actor','actress','celebrity','celebrity'],4,8,80);
+                        break;
+                    case'driverToggle':
+                        speech=this.getFilteredSpeech(['tailgating','driver','driving','minutes','late','jaywalking','ticket','penalty','who cares','just say no','dmv','license','driving','reckless','auditory','honk','revved','road','headache','bumper sticker','texting','eye contact','shout','authority','sleep','driver','cut me off','took my spot','sped by me','blind spot','voices','fender bender','crash'],3,8,80);
+                        break;
+                    case'canadianToggle':
+                        speech=this.getFilteredSpeech(['sorry'],1,4,60);
+                        break;
+                    case'roboToggle':
+                        speech=this.getFilteredSpeech(['virus','hacking','algorithm','copyright','email','creep','effectiveness','radical','echo effect activated','effect activated','harmful','elite','id','correction','clarify','inserted','cancel','texting','risky','hint','clue','said','talked','authority','electrodes','execution','keep enemies close','social','useless intelligence','nonsense','order by','test','statistics','inserted','database','detected','identified','insert','update','code','select','crash','halt','name'],5,8,100);
+                        break;
+                    case'loveToggle':
+                        speech=this.getFilteredSpeech(['great person','help','friendly','friendship','hospitality','remain optimistic','most interesting','most unique','love','love you','love','peace','in the world'],2,4,50);
+                        break;
+                    case'whyToggle':
+                        speech=this.getFilteredSpeech(['why','just','if'],3,6,100);
+                        break;
+                    case'understandToggle':
+                        speech=this.getFilteredSpeech(['understand'],1,6,60);
+                        break;
+                    case'allToggle':
+                        speech=this.getFullSpeech(6,100);
+                        break;
                 }
+
 
                 try{
                     this.speech=new SpeechSynthesisUtterance(speech);
@@ -440,8 +462,11 @@
             font-size: 24px;
             margin-left:10px;
         }
-        #toggleContainer>label>input[type=radio]{
-            margin-left:20px;
+        #personalityToggle{
+            margin-top:10px;
+            margin-left:40px;
+            padding:6px;
+            font-size: 24px;
         }
         #toggleContainer>label>input{
             width:20px;
@@ -454,6 +479,7 @@
             display:inline-block;
             position:relative;
             text-align:left;
+            font-weight: bold;
         }
         #personalityRight{
             position:fixed;
@@ -500,20 +526,22 @@
             <label id="pianoToggle"><input type="checkbox" checked/> Piano Mode</label><br/>
             <label id="randomToggle"><input type="checkbox" checked/> Random Personality</label><br/>
 
-            <!-- combobox dropdown -->
 
-            <label id="noneToggle"><input type="radio" name="personality" checked/> All</label><br/>
-            <label id="albertToggle"><input type="radio" name="personality"/> Albert's Nightmare</label><br/>
-            <label id="nopeYupToggle"><input type="radio" name="personality"/> Nope / Yup</label><br/>
-            <label id="politicsToggle"><input type="radio" name="personality"/> Politics</label><br/>
-            <label id="celebrityToggle"><input type="radio" name="personality"/> Celebrity</label><br/>
-            <label id="schizophrenicToggle"><input type="radio" name="personality"/> Schizophrenia</label><br/>
-            <label id="driverToggle"><input type="radio" name="personality"/> Driving</label><br/>
-            <label id="canadianToggle"><input type="radio" name="personality"/> Canadian</label><br/>
-            <label id="roboToggle"><input type="radio" name="personality"/> Robo Authority</label><br/>
-            <label id="loveToggle"><input type="radio" name="personality"/> Love</label><br/>
-            <label id="whyToggle"><input type="radio" name="personality"/> Why / Just</label>
+            <select id="personalityToggle">
+                <option value="allToggle">All</option>
+                <option value="albertToggle">Albert's Nightmare</option>
+                <option value="nopeYupToggle">Nope / Yup</option>
+                <option value="politicsToggle">Politics</option>
+                <option value="celebrityToggle">Celebrity</option>
+                <option value="schizophrenicToggle">Schizophrenia</option>
+                <option value="driverToggle">Driving</option>
+                <option value="canadianToggle">Canadian</option>
+                <option value="roboToggle">Robo Authority</option>
+                <option value="loveToggle">Love</option>
+                <option value="whyToggle">Why / Just</option>
+                <option value="understandToggle">Understand</option>
 
+            </select>
 
 
         </div>
@@ -902,14 +930,29 @@
                 'accepted',
                 'rejected',
                 'preparation',
-                'reject'
-
+                'reject',
+                'institution',
+                'virus',
+                'hacking',
+                'hivemind',
+                'strange',
+                'weird',
+                'creepy',
+                'hit',
+                'pass',
+                'match',
+                'venture',
+                'occupation',
+                'nation',
+                'pattern',
+                'infamy'
 
 
             ],
 
             weeksVoices:[
                 [
+                    'paranoid delusions',
                     'he\'s just a+',
                     'she\'s just a+',
                     'I don\'t care',
@@ -994,6 +1037,7 @@
                     'described in two words+',
                     'these people are mad',
                     'you are going to be+',
+                    'you are going to be put in a+',
                     'you are going to be a millionaire',
                     'everybody loves you',
                     'everybody hates you',
@@ -1028,6 +1072,7 @@
                     'you are beautiful',
                     'you are too proud',
                     'you need to get help',
+                    'you need to realize',
                     'that is exactly what+',
                     'they would say+',
                     'they would start+',
@@ -1228,6 +1273,7 @@
                     'they are watching',
                     'you shouldn\'t have said+',
                     '+says that+',
+                    'you tried to+',
                     'you tried to make a+',
                     'we are trying to+',
                     'we will stop if you+',
@@ -1837,6 +1883,7 @@
                     'antagonizing speech',
                     '+because even though',
                     '+that is all they think about',
+                    'that\'s all they do',
                     '+driving by me',
                     '+driving next to me',
                     'that driver just+',
@@ -2188,7 +2235,58 @@
                     'sever depression',
                     'this is not torture',
                     'I was like+',
-                    'I was like what+'
+                    'I was like what+',
+                    'speak swift leave',
+                    'this is+',
+                    'their artistic expression',
+                    'millions of years ago',
+                    'billions of years ago',
+                    'artificial hivemind',
+                    'all think the same',
+                    'no limits',
+                    'no fear',
+                    'fear itself',
+                    'nothing to fear',
+                    'forced to think',
+                    'forced to listen',
+                    'forced to know',
+                    'met somebody',
+                    'new friend',
+                    'new lover',
+                    'feel different',
+                    'that\'s strange',
+                    'that\'s weird',
+                    'personality disorder',
+                    'carved sculpture',
+                    'this odd show',
+                    'why won\'t you+',
+                    'live in fear',
+                    'put up with+',
+                    'look at the+',
+                    'it is obvious',
+                    'you declare why',
+                    'I would imagine',
+                    'too much pressure',
+                    'to feel like a+',
+                    'what does that mean',
+                    'you are not listening',
+                    '+they thought+',
+                    'because I said+',
+                    'everyones sorrow',
+                    'worlds pain',
+                    'earth day',
+                    'positive propaganda',
+                    'eat chocolate',
+                    'why would I+',
+                    'waste of time',
+                    'events in your life',
+                    'command hallucinations',
+                    'you left the oven on',
+                    'to be professional',
+                    'we all make mistakes',
+                    'you can help',
+                    'pay your rent',
+                    'I can\'t think'
                 ],
                 [
                     'this is last weeks voices',
@@ -2266,7 +2364,6 @@
                 'cooperate',
                 'inn',
                 'death',
-                'monkey',
                 'prosper',
                 'court',
                 'yearn',
@@ -2539,8 +2636,6 @@
                 'rest',
                 'relate',
                 'automatic',
-                'transparent',
-                'collar',
                 'define',
                 'mosaic',
                 'band',
@@ -2729,7 +2824,6 @@
                 'finance',
                 'sense',
                 'limit',
-                'belt',
                 'consultation',
                 'formal',
                 'taxi',
