@@ -184,7 +184,7 @@
                 }else if($('#canadianToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['sorry'],1,4,60);
                 }else if($('#roboToggle>input').is(':checked')){
-                    speech=this.getFilteredSpeech(['copyright','email','creep','effectiveness','radical','echo effect activated','effect activated','harmful','elite','id','correction','clarify','inserted','cancel','texting','risky','hint','clue','said','talked','authority','electrodes','execution','keep enemies close','social','useless intelligence','nonsense','order by','test','statistics','inserted','database','detected','identified','insert','update','code','select','crash','halt','name'],5,8,100);
+                    speech=this.getFilteredSpeech(['algorithm','copyright','email','creep','effectiveness','radical','echo effect activated','effect activated','harmful','elite','id','correction','clarify','inserted','cancel','texting','risky','hint','clue','said','talked','authority','electrodes','execution','keep enemies close','social','useless intelligence','nonsense','order by','test','statistics','inserted','database','detected','identified','insert','update','code','select','crash','halt','name'],5,8,100);
                 }else if($('#loveToggle>input').is(':checked')){
                     speech=this.getFilteredSpeech(['great person','help','friendly','friendship','hospitality','remain optimistic','most interesting','most unique','love','love you','love','peace','in the world'],2,4,50);
                 }else if($('#whyToggle>input').is(':checked')){
@@ -312,8 +312,8 @@
                     msg=Words.randomNamesOfNoImportanceToMeBecauseAnonymityButTheRealVoicesUseNamesRelevantToMe[r];
                     this.lastWasAltVoices=true;
                 }else{
-                    r=Math.floor(Math.random()*Words.repeatedAnnoyingWords.length);
-                    msg=Words.repeatedAnnoyingWords[r];
+                    r=Math.floor(Math.random()*Words.repeatedWords.length);
+                    msg=Words.repeatedWords[r];
                     this.lastWasAltVoices=true;
                 }
 
@@ -605,7 +605,7 @@
 
             ],
 
-            repeatedAnnoyingWords:[
+            repeatedWords:[
                 'celebrity',
                 'depression',
                 'taxes',
@@ -895,7 +895,14 @@
                 'artificial',
                 'morale',
                 'tailgating',
-                'algorithm'
+                'algorithm',
+                'shame',
+                'humiliated',
+                'humiliate',
+                'accepted',
+                'rejected',
+                'preparation',
+                'reject'
 
 
 
@@ -903,6 +910,8 @@
 
             weeksVoices:[
                 [
+                    'he\'s just a+',
+                    'she\'s just a+',
                     'I don\'t care',
                     'tough decisions',
                     'secretly communicating',
@@ -1045,6 +1054,8 @@
                     'they are just+',
                     'a bunch of+',
                     'they know what voices are',
+                    'they know exactly what+',
+                    'deception reflected',
                     'that is what they are trying+',
                     'pay your debt',
                     'they are hearing voices in their head',
@@ -1602,8 +1613,10 @@
                     'how would you know+',
                     'how would you know that+',
                     'we don\'t actually+',
+                    'you don\'t actually+',
                     'you need to+',
                     'why are you always+',
+                    'you always try to+',
                     'feel so much pain that+',
                     'they want to spite you',
                     'they are trying to spite you',
@@ -1642,6 +1655,8 @@
                     'this is the american way',
                     'where did you hear that+',
                     'where did you learn that+',
+                    'indefensible escalation',
+                    'you put yourself in a+',
                     'indefensible position',
                     'we are not terrifying you',
                     'other side of the world',
@@ -2146,7 +2161,27 @@
                     'try out best',
                     '+but your putting voices into+',
                     'they even talk about my+',
-                    'this is the culmination of+'
+                    'this is the culmination of+',
+                    'every value this country+',
+                    '+stands for',
+                    'loyalty to+',
+                    'alliance with+',
+                    'alliance formed',
+                    'they think+',
+                    'the whole world+',
+                    '+is watching',
+                    'proven wrong denial',
+                    'this is an algorithm',
+                    'this is an+',
+                    'they speak as+',
+                    'they speak as gods',
+                    'she doesn\'t have',
+                    'he doesn\'t have',
+                    'voices are+',
+                    '+making me dumb',
+                    '+making me numb',
+                    '+making you dumb',
+                    '+making you numb'
                 ],
                 [
                     'this is last weeks voices',
