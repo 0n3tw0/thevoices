@@ -113,6 +113,9 @@
             },
 
             getFullSpeech:function(words,maxSpeechLength){
+				if($('#doubleToggle>input').is(':checked')){
+					maxSpeechLength*=2;
+				}
                 var i;
                 var len=Math.floor(Math.random()*(words/2))+1;
                 var speech;
@@ -134,6 +137,10 @@
             },
 
             getFilteredSpeech:function(filters,matches,words,maxSpeechLength){
+				if($('#doubleToggle>input').is(':checked')){
+					words*=2;
+					maxSpeechLength*=2;
+				}
                 var speech;
                 var i;
                 var len=filters.length;
@@ -579,6 +586,7 @@
         <div id="toggleContainer">
 
             <label id="pianoToggle"><input type="checkbox" checked/> Piano Mode</label><br/>
+			<label id="doubleToggle"><input type="checkbox"/> Double Mode</label><br/>
             <label id="randomToggle"><input type="checkbox" checked/> Random Personality</label><br/>
 
 
@@ -666,7 +674,6 @@
                 'name',
                 'man',
                 'woman',
-                'president',
                 'dude',
                 'american',
                 'official',
@@ -2572,6 +2579,7 @@
 					'this is not terrifying',
 					'this is not terrifying you',
 					'five year escalation product',
+					'nine year escalation product',
 					'+and still unsatisfied',
 					'+and still upset',
 					'+and still angry',
@@ -2664,7 +2672,26 @@
 					'they always do this',
 					'action hierarchies',
 					'confusing conflicting advice',
-					'ping ponging emotional state'
+					'ping ponging emotional state',
+					'indoctrinated american history',
+					'driving while insomnia',
+					'scanner in two',
+					'what\'s the point',
+					'it skips a generation',
+					'smile in your eyes',
+					'with a smirk',
+					'they are scared of you',
+					'you are not racist',
+					'you are not sexist',
+					'you are not homophobic',
+					'they think I\'m connected to',
+					'what was I going to do',
+					'throw it away',
+					'they are all the same',
+					'take out the garbage',
+					'why me',
+					'who am I',
+					'leave abruptly'
 
                 ],
                 [
@@ -2927,7 +2954,6 @@
                 'agile',
                 'extreme',
                 'reputation',
-                'harass',
                 'claim',
                 'frozen',
                 'laborer',
@@ -3324,7 +3350,6 @@
                 'equal',
                 'sock',
                 'strip',
-                'blind',
                 'code',
                 'clerk',
                 'category',
