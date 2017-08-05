@@ -222,7 +222,7 @@
                         speech=this.getFilteredSpeech(['pulled over','pulled over','tailgating','driver','driving','minutes','late','jaywalking','ticket','penalty','who cares','just say no','dmv','license','driving','reckless','auditory','honk','revved','road','headache','bumper sticker','texting','eye contact','shout','authority','sleep','driver','cut me off','took my spot','sped by me','blind spot','voices','fender bender','crash'],3,8,80);
                         break;
                     case'canadianToggle':
-                        speech=this.getFilteredSpeech(['sorry'],1,4,60);
+                        speech=this.getFilteredSpeech(['sorry'],1,4,40);
                         break;
                     case'roboToggle':
                         speech=this.getFilteredSpeech(['nonsense','useless intelligence','virus','hacking','algorithm','copyright','email','creep','effectiveness','echo effect activated','effect activated','harmful','elite','id','correction','clarify','inserted','cancel','texting','risky','hint','clue','said','talked','authority','electrodes','execution','keep enemies close','social','useless intelligence','nonsense','order by','test','statistics','inserted','database','detected','identified','insert','update','code','select','crash','halt','name'],5,8,100);
@@ -344,9 +344,13 @@
 				for(i=0;i<len;i++){
 					if($('#history>p:first-child>span.highlighted').text().indexOf(this.happyKeywordsForPets[i])>=0){
 						setTimeout(function(){
-							$('#petImg').html('<img src="'+this.lovablePetImages[Math.floor(Math.random()*this.lovablePetImages.length)]+'"/>').addClass('show');
-							$('#petImg').css('top',$('#history>p:first-child>span.highlighted').offset().top+($('#history>p:last-child').height())+'px');
-							$('#petImg').css('left',$('#history>p:first-child>span.highlighted').offset().left+'px');
+							$('#petImg').html('<img src="'+this.lovablePetImages[Math.floor(Math.random()*this.lovablePetImages.length)]+'"/>');
+							setTimeout(function(){
+								$('#petImg').css('margin-left','-'+($('#petImg').outerWidth()/2)+'px').css('margin-top','-'+($('#petImg').outerHeight()/2)+'px').addClass('show');
+
+							},100);
+							//$('#petImg').css('top',$('#history>p:first-child>span.highlighted').offset().top+($('#history>p:last-child').height())+'px');
+							//$('#petImg').css('left',$('#history>p:first-child>span.highlighted').offset().left+'px');
 						}.bind(this),200);
 						
 						setTimeout(function(){
@@ -550,6 +554,9 @@
 			border:40px solid black;
 			opacity:0;
 			z-index:1;
+			left:50%;
+			top:50%;
+			transition:opacity linear .1s;
 		}
 		#petImg.show{
 			opacity:1;
@@ -694,7 +701,8 @@
 				'anonymous',
                 'imposter',
                 'occupation',
-				'superficial'
+				'superficial',
+				'fan'
             ],
 
             repeatedWords:[
@@ -1012,11 +1020,14 @@
 				'improve',			
 				'deescalate',
 				'deescalation',
-				'union'
+				'union',
+				'neat',
+				'opposition'
             ],
 
             weeksVoices:[
                 [
+					'kind shadow ban neat',
 					'order by',
                     'this person wants that',
                     'that person wants this',
