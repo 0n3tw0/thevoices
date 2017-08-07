@@ -185,6 +185,21 @@
                 return speech;
             },
 
+            addStutter:function(speech){
+                speech=speech.split(' ');
+                var r;
+                while(true){
+                    r=Math.floor(Math.random()*speech.length);
+                    if(speech[r].trim()!=''){
+                        break;
+                    }
+                }
+                speech.splice(r,0,speech[r]);
+                speech=speech.join(' ');
+                console.log(speech[r]);
+                return speech;
+            },
+
             continueWeek:function(){
 
                 if(this.cancelled){
@@ -244,6 +259,11 @@
                         break;
 
                 }
+
+                if(Math.random()<.5){
+                    speech=this.addStutter(speech);
+                }
+
 
 
                 try{
@@ -314,6 +334,7 @@
                             var start;
                             var velocity;
                             var channel;
+                            var volume;
 
                             var i;
                             var len=3+Math.floor(Math.random()*14);
@@ -327,7 +348,11 @@
                                     }
                                 }
                                 velocity=Math.floor(Math.random()*128);
-                                MIDI.setVolume(0, (60+(Math.random()*50))-(i*3));
+                                volume=((Math.random()*30))-(i*3);
+                                if(volume<0){
+                                    volume=5;
+                                }
+                                MIDI.setVolume(0, volume);
                                 delay+=(i*.1)+(Math.random()/8);
                                 channel=Math.floor(Math.random()*4);
                                 MIDI.noteOn(0, note, velocity, delay);
@@ -879,7 +904,6 @@
                 'sweet',
                 'famous',
                 'fame',
-                'famous',
                 'column',
                 'love',
                 'hate',
@@ -1131,6 +1155,7 @@
                     'following you',
                     'induced mental illness',
                     'you will win the lotto',
+                    'play the lotto',
                     'you are sick',
                     'take medication',
                     'for the rest of your life',
@@ -1403,6 +1428,12 @@
                     'the foundation for+',
                     'experimental study',
                     'you will be famous for+',
+                    'you will be famous',
+                    'you are famous',
+                    'benefit of the doubt',
+                    'never the benefit of a doubt',
+                    'reimagine your entire life',
+                    'reenvision your entire life',
                     'everybody will know who you are',
                     'the fame is unavoidable',
                     'do not upset fans millionaire',
@@ -2775,7 +2806,13 @@
 					'whole world career defense',
 					'they are arming',
 					'why are they arming',
-					'people are arming'
+					'people are arming',
+					'do not arm',
+					'this is not a tragedy',
+					'this is not a travesty',
+					'they prevented you from+',
+					'they prevented you',
+					'you could have+'
 
 
 					
