@@ -204,7 +204,7 @@
                 var r;
                 while(true){
                     r=Math.floor(Math.random()*speech.length);
-                    if(speech[r].trim()!=''){
+                    if(Math.random()<.1||speech[r].trim()!=''){
                         break;
                     }
                 }
@@ -269,6 +269,9 @@
                         break;
                     case'greatToggle':
                         speech=this.getFilteredSpeech(['great','oh great'],1,6,60);
+                        break;
+                    case'thinkToggle':
+                        speech=this.getFilteredSpeech(['think'],1,6,60);
                         break;
 
                 }
@@ -653,6 +656,7 @@
                 <option value="whyToggle">Why / Just</option>
                 <option value="understandToggle">Understand</option>
                 <option value="greatToggle">Oh Great</option>
+                <option value="thinkToggle">Think</option>
 
             </select>
 
@@ -1068,7 +1072,10 @@
 				'wonderful',
 				'tradition',
 				'ritual',
-				'demonstrate'
+				'demonstrate',
+				'possibility',
+				'assume',
+				'presume'
             ],
 
             weeksVoices:[
@@ -2831,7 +2838,16 @@
 					'you could have+',
 					'they have immunity',
 					'tag your it',
-					'and now they\'re talking about another profession'
+					'and now they\'re talking about another profession',
+					'they assume that+',
+					'they assumed that+',
+					'they presumed that+',
+					'they presume that+',
+					'always thinking',
+					'stop thinking so much',
+					'don\'t think so much',
+					'let me think'
+
 
 
 					
