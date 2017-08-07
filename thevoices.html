@@ -196,7 +196,20 @@
                 }
                 speech.splice(r,0,speech[r]);
                 speech=speech.join(' ');
-                console.log(speech[r]);
+                return speech;
+            },
+
+            removeRandomWord:function(speech){
+                speech=speech.split(' ');
+                var r;
+                while(true){
+                    r=Math.floor(Math.random()*speech.length);
+                    if(speech[r].trim()!=''){
+                        break;
+                    }
+                }
+                speech.splice(r,1);
+                speech=speech.join(' ');
                 return speech;
             },
 
@@ -260,9 +273,11 @@
 
                 }
 
-                if(Math.random()<.5){
+                if(Math.random()<.25){
                     speech=this.addStutter(speech);
-                    
+                }
+                if(Math.random()<.25){
+                    speech=this.removeRandomWord(speech);
                 }
 
 
@@ -2813,7 +2828,9 @@
 					'this is not a travesty',
 					'they prevented you from+',
 					'they prevented you',
-					'you could have+'
+					'you could have+',
+					'they have immunity',
+					'tag your it'
 
 
 					
