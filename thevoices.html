@@ -408,7 +408,7 @@
 						setTimeout(function(){
 							$('#petImg').html('<img src="'+this.lovablePetImages[Math.floor(Math.random()*this.lovablePetImages.length)]+'"/>');
 							setTimeout(function(){
-								$('#petImg').css('margin-left','-'+($('#petImg').outerWidth()/2)+'px').css('margin-top','-'+($('#petImg').outerHeight()/2)+'px').addClass('show');
+								$('#petImg').css('margin-left','-'+($('#petImg').outerWidth()/2)+'px').css('margin-top','-'+($('#petImg').outerHeight()/2)+'px').css('visibility','visible').addClass('show');
 
 							},100);
 							//$('#petImg').css('top',$('#history>p:first-child>span.highlighted').offset().top+($('#history>p:last-child').height())+'px');
@@ -417,6 +417,9 @@
 						
 						setTimeout(function(){
 							$('#petImg').removeClass('show');
+							setTimeout(function(){
+								$('#petImg').removeClass('show').css('visibility','hidden');
+							},200);
 						},1000);
 					}
 				}
@@ -612,7 +615,7 @@
 			z-index:1;
 			left:50%;
 			top:50%;
-			transition:opacity linear .1s;
+			transition:opacity linear 0.1s;
 		}
 		#petImg.show{
 			opacity:1;
@@ -1084,13 +1087,17 @@
 				'possibility',
 				'assume',
 				'presume',
-				'holiday'
+				'holiday',
+				'enhance',
+				'magnify'
 
 
             ],
 
             weeksVoices:[
                 [
+					'zoom in',
+					'zoom out',
                     'educational motivational inspirational people',
                     'educational motivational inspirational',
 					'kind shadow ban neat',
