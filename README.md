@@ -1,6 +1,6 @@
 # thevoices
 
-A Simulation of hearing voices.
+A Simulation of hearing voices. A video recording of this in action can be [seen here](https://youtu.be/-9OgVvxCYkg).
 
 ## Libraries
 
