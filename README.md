@@ -2,7 +2,7 @@
 
 A Simulation of hearing voices. A video recording of this in action can be [seen here](https://youtu.be/-9OgVvxCYkg).
 
-[![The Voices - A Simulation (Update 8/07)](https://img.youtube.com/vi/-9OgVvxCYkg/0.jpg)](https://youtu.be/-9OgVvxCYkg)
+[(https://img.youtube.com/vi/-9OgVvxCYkg/0.jpg)](https://youtu.be/-9OgVvxCYkg)
 
 ## Libraries
 
